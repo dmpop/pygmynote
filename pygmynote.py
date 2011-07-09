@@ -109,7 +109,7 @@ if CREATE == True:
 	conn.commit()
 
 print 'Today\'s deadlines:'
-cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '"+today+"' AND type <> 'H' ORDER BY id ASC")
+cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> 'H' ORDER BY id ASC")
 rows = cursor.fetchall()
 for row in rows:
 	print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
@@ -166,17 +166,17 @@ q	Quit"""
 			f=open(notefile, 'rb')
 			ablob = f.read()
 			f.close()
-			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('"+notetext+"', '"+notetags+"', '"+notetype+"', '" +notefile[-3:]+"', ?)", [sqlite.Binary(ablob)])
+			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + notetext + "', '" + notetags + "', '" + notetype + "', '"  + notefile[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
 			print '\nRecord has been added.'
 		elif command == 's':
 
 # Save file
 
-			recid = raw_input('Record id: ')
+			recordid = raw_input('Record id: ')
 			outputfile=raw_input('Specify full path and file name (e.g., /home/user/loremipsum.odt): ')
 			f=open(outputfile, 'wb')
-			cursor.execute ("SELECT file FROM notes WHERE id='" + recid + "'")
+			cursor.execute ("SELECT file FROM notes WHERE id='"  +  recordid  +  "'")
 			ablob = cursor.fetchone()
 			f.write(ablob[0])
 			f.close()
@@ -189,7 +189,7 @@ q	Quit"""
 
 			notetext = raw_input('Search notes for: ')
 			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
-							+ notetext + "%'ORDER BY id ASC")
+							 +  notetext  +  "%'ORDER BY id ASC")
 			rows = cursor.fetchall()
 			print '\n*********'
 			for row in rows:
@@ -201,7 +201,7 @@ q	Quit"""
 
 			searchtag = raw_input ('Search by tag: ')
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
-							+ searchtag + "%' AND type='A' ORDER BY id ASC")
+							 +  searchtag  +  "%' AND type='A' ORDER BY id ASC")
 			rows = cursor.fetchall()
 			print '\n*********'
 			for row in rows:
@@ -231,29 +231,29 @@ q	Quit"""
 
 # Update note
 
-			recid = raw_input('Record id: ')
+			recordid = raw_input('Record id: ')
 			notetype = raw_input('Update note (n), tags (t), due date (d), or mark as hidden (h): ')
 			if notetype == 'n':
-				cursor.execute ("SELECT id, note FROM notes WHERE id='" + recid + "'")
+				cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recordid  +  "'")
 				row = cursor.fetchone()
 				print 'Current contents: %s' % row[1]
 				noteupdate = raw_input('Note: ')
 				sqlstr = escapechar(noteupdate)
-				cursor.execute("UPDATE notes SET note='" + sqlstr
-								+ "' WHERE id='" + recid + "'")
+				cursor.execute("UPDATE notes SET note='"  +  sqlstr
+								 +  "' WHERE id='"  +  recordid  +  "'")
 			elif notetype == 't':
 				tagupdate = raw_input('Tags: ')
 				sqlstr = escapechar(tagupdate)
-				cursor.execute("UPDATE notes SET tags='" + sqlstr
-								+ "' WHERE id='" + recid + "'")
+				cursor.execute("UPDATE notes SET tags='"  +  sqlstr
+								 +  "' WHERE id='"  +  recordid  +  "'")
 			elif notetype == 'd':
 				dueupdate = raw_input('Due date: ')
-				cursor.execute("UPDATE notes SET due='" + dueupdate
-								+ "' WHERE id='" + recid + "'")
+				cursor.execute("UPDATE notes SET due='"  +  dueupdate
+								 +  "' WHERE id='"  +  recordid  +  "'")
 			else:
 				notetype = 'H'
-				cursor.execute("UPDATE notes SET type='" + notetype
-								+ "' WHERE id='" + recid + "'")
+				cursor.execute("UPDATE notes SET type='"  +  notetype
+								 +  "' WHERE id='"  +  recordid  +  "'")
 			conn.commit()
 			print '\nRecord has been updated.'
 		elif command == 'tl':
@@ -289,8 +289,8 @@ q	Quit"""
 
 # Delete note by its ID
 
-			recid = raw_input('Delete note ID: ')
-			cursor.execute("DELETE FROM notes WHERE ID='" + recid + "'")
+			recordid = raw_input('Delete note ID: ')
+			cursor.execute("DELETE FROM notes WHERE ID='"  +  recordid  +  "'")
 			print '\nRecord has been deleted.'
 			conn.commit()
 		elif command == 'w':
