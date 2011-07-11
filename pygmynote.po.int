@@ -15,20 +15,32 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: pygmynote.py:48
+#: pygmynote.py:49
 msgid "Use sqlite, with python %s"
 msgstr ""
 
-#: pygmynote.py:52
+#: pygmynote.py:53
 msgid "Use pysqlite2, with python %s"
 msgstr ""
 
-#: pygmynote.py:94
-msgid "Impossible to conect to the SQLite database"
+#: pygmynote.py:64
+msgid "Creating a new database."
 msgstr ""
 
-#: pygmynote.py:96
+#: pygmynote.py:60
+msgid "The database already exists."
+msgstr ""
+
+#: pygmynote.py:74
+msgid "Connection to the SQLite database failed!"
+msgstr ""
+
+#: pygmynote.py:85
 msgid "Pygmynote is ready. Pile up!"
+msgstr ""
+
+#: pygmynote.py:107
+msgid "Today\'s deadlines:"
 msgstr ""
 
 #: pygmynote.py:123
@@ -39,88 +51,90 @@ msgid ""
 "   ===================\n"
 "\n"
 "   i    Insert a new record\n"
-"   n    Search records\n"
+"   f    Insert new record with an attachment\n"
+"   s    Save attachment\n"
+"   n    Search records by note\n"
 "   t    Search records by tag\n"
-"   a    Show all records\n"
+"   a    Show active records\n"
+"   h    Show hidden records\n"
 "   u    Update record\n"
-"   td   Show today's tasks\n"
-"   sql  Run custom SQL query\n"
-"   url  Open URL\n"
-"   cal  Show calendar\n"
-"   eml  Get email reminders\n"
+"   tl    Show tasks\n"
+"   ext    Show records with attachments\n"
+"   cal    Show calendar\n"
+"   w    Export records as CSV file\n"
 "   d    Delete record by its ID\n"
-"   w    Save all records as pygmynote.txt\n"
 "   q    Quit"
 msgstr ""
 
-#: pygmynote.py:145 pygmynote.py:191
+#: pygmynote.py:144 pygmynote.py:158 pygmynote.py:236
 msgid "Note: "
 msgstr ""
 
-#: pygmynote.py:146 pygmynote.py:196
+#: pygmynote.py:145 pygmynote.py:159 pygmynote.py:241
 msgid "Tags: "
 msgstr ""
 
-#: pygmynote.py:152
+#: pygmynote.py:153 pygmynote.py:167
 msgid ""
 "\n"
 "Record has been added."
 msgstr ""
 
-#: pygmynote.py:157
+#: pygmynote.py:181
+msgid ""
+"\n"
+"File has been saved."
+msgstr ""
+
+#: pygmynote.py:186
 msgid "Search notes for: "
 msgstr ""
 
-#: pygmynote.py:163 pygmynote.py:174 pygmynote.py:183 pygmynote.py:210
-#: pygmynote.py:220
-msgid ""
-"\n"
-"   Number of records: %d"
-msgstr ""
-
-#: pygmynote.py:168
+#: pygmynote.py:198
 msgid "Search by tag: "
 msgstr ""
 
-#: pygmynote.py:188 pygmynote.py:225
+#: pygmynote.py:172 pygmynote.py:230
 msgid "Record id: "
 msgstr ""
 
-#: pygmynote.py:189
-msgid "Update note (n) or tags (t): "
+#: pygmynote.py:231
+msgid "Update note (n), tags (t), due date (d), or mark as hidden (h): "
 msgstr ""
 
-#: pygmynote.py:200
+#: pygmynote.py:254
 msgid ""
 "\n"
 "Record has been updated."
 msgstr ""
 
-#: pygmynote.py:215
-msgid "SQL query: "
-msgstr ""
-
-#: pygmynote.py:234
+#: pygmynote.py:279
 msgid "Month (1-12): "
 msgstr ""
 
-#: pygmynote.py:243
+#: pygmynote.py:288
 msgid "Delete note ID: "
 msgstr ""
 
-#: pygmynote.py:245
+#: pygmynote.py:290
 msgid ""
 "\n"
 "Record has been deleted."
 msgstr ""
 
-#: pygmynote.py:259
+#: pygmynote.py:305
 msgid ""
 "\n"
 "Records have been saved in the pygmynote.txt file."
 msgstr ""
 
-#: pygmynote.py:285
+#: pygmynote.py:308
+msgid ""
+"\n\n"
+"\033[1;31mSomething went wrong. Try again.\033[1;m"
+msgstr ""
+
+#: pygmynote.py:318
 msgid ""
 "\n"
 "Have a nice day!\n"
