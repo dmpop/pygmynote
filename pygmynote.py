@@ -7,11 +7,6 @@ Pygmynote is written in Python and uses a SQLite database as its back-end.
 
 Thanks to Luis Cabrera Sauco for the SQLite and i18 support.
 
-Referencias:
-http://www.devshed.com/index2.php?option=content&task=view&id=845&pop=1&hide_ads=1&page=0&hide_js=1
-http://gcubo.org/documentacion/recetas/gettextpython/ ó http://www.gcubo.org/documentacion/recetas/gettextpython/
-http://www.miguev.net/misc/PyGettextMicroComo.html
-
 i18:
 ~~~~
 pygettext -k_ -o pygmynote.po pygmynote.py
@@ -119,7 +114,7 @@ while command != 'q':
 
 	try:
 
-		command = raw_input('\n:')
+		command = raw_input('\n>')
 
 		if command == 'help':
 			print """
@@ -192,10 +187,10 @@ q	Quit"""
 			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
 							 +  notetext  +  "%'ORDER BY id ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-			print '\n*********'
+			print '\n-----'
 		elif command == 't':
 
 # Search records by tag
@@ -204,30 +199,30 @@ q	Quit"""
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
 							 +  searchtag  +  "%' AND type='A' ORDER BY id ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-			print '\n*********'
+			print '\n-----'
 		elif command == 'a':
 
 # Show active records
 
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='A' ORDER BY id ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-			print '\n*********'
+			print '\n-----'
 		elif command == 'h':
 
 # Show hidden records
 
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='H' ORDER BY id ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-			print '\n*********'
+			print '\n-----'
 		elif command == 'u':
 
 # Update note
@@ -263,20 +258,22 @@ q	Quit"""
 
 			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND type = 'A' ORDER BY due ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
+			now = datetime.datetime.now()
+			calendar.prmonth(now.year, now.month)
 			for row in rows:
 				print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
-			print '\n*********'
+			print '\n-----'
 		elif command == 'ext':
 
 # Show records with attachments
 
 			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='A' ORDER BY id ASC")
 			rows = cursor.fetchall()
-			print '\n*********'
+			print '\n-----'
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m \033[1;43m%s\033[1;m' % (row[0], row[1], row[2], row[3])
-			print '\n*********'
+			print '\n-----'
 		elif command == 'cal':
 
 # Show calendar
@@ -321,7 +318,7 @@ print """\033[1;33m
       / \\
 ================
 Have a nice day!
-================\\033[1;m\n"""
+================\033[1;m\n"""
 
 cursor.close()
 conn.close()
