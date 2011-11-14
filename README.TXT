@@ -14,10 +14,14 @@ You should have received a copy of the GNU General Public License along with thi
 Source code:
 https://github.com/dmpop/pygmynote
 
+==USAGE==
+
+Run the pygmynote.py script in the Terminal. Type "help" (without quotes) and press Enter to view the available commands.
+
 ==CHANGELOG==
 
 VERSION 0.7.9 2011-11-14
-  * Minor fixes and cosmetic tweaks.
+  * Minor fixes and cosmetic tweaks
 
 VERSION 0.7.7 2011-07-09
   * Minor tweaks
