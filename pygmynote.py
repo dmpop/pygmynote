@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Pygmynote is a command-line tool for storing and managing heterogeneous personal data.
-Pygmynote is written in Python and uses a SQLite database as its back-end.
+Pygmynote is a command-line tool for storing and managing heterogeneous bit of data, including notes, tasks, links, and file attachments.Pygmynote is written in Python and uses a SQLite database as its back end.
 
 Thanks to Luis Cabrera Sauco for the SQLite and i18 support.
 
@@ -23,7 +22,7 @@ $ LANGUAGE=es python pygmynote.py
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
 __copyright__ = 'Copyright 2011 Dmitri Popov'
 __license__ = 'GPLv3'
-__version__ = '0.7.7'
+__version__ = '0.7.9'
 __URL__ = 'http://www.github.com/dmpop'
 
 import sys
@@ -77,11 +76,10 @@ today = time.strftime('%Y-%m-%d')
 command = ''
 
 print """\033[1;32m
-            _
-         o(*_*)o_
-          /(.)~[ O]
-           / \\
-============================
+           ( 0)>
+          (( *))
+            ||
+==========="=="=============
 Pygmynote is ready. Pile up!
 ============================\033[1;m\n"""
 
@@ -312,13 +310,12 @@ q	Quit"""
 		continue
 
 print """\033[1;33m
-       _
-    o(*_*)o_
-     /(.)~[ O]
-      / \\
-================
-Have a nice day!
-================\033[1;m\n"""
+        ( 0)>
+       (( *))
+         ||
+========"=="=========
+Bye! Have a nice day.
+=====================\033[1;m\n"""
 
 cursor.close()
 conn.close()

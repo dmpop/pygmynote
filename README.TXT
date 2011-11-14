@@ -1,14 +1,23 @@
 = PYGMYNOTE =
 
-Pygmynote is a command-line tool for storing and managing heterogeneous personal data. Pygmynote is written in Python and uses a SQLite database as its back-end.
+Pygmynote is a command-line tool for storing and managing heterogeneous bit of data, including notes, tasks, links, and file attachments.Pygmynote is written in Python and uses a SQLite database as its back end
 
-Copyright 2010 Dmitri Popov
-Anyone may run the code associated with this document. If you wish to modify or distribute this document and or its code, then you are granted a license to do so under the terms of the GNU General Public License. See:  http://www.gnu.org/licenses/gpl.html
+Copyright 2010, 2011 Dmitri Popov
+
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,MA 02110-1301, USA.
 
 Source code:
 https://github.com/dmpop/pygmynote
 
 ==CHANGELOG==
+
+VERSION 0.7.9 2011-11-14
+  * Minor fixes and cosmetic tweaks.
 
 VERSION 0.7.7 2011-07-09
   * Minor tweaks
