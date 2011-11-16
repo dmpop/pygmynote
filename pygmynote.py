@@ -123,11 +123,12 @@ Pygmynote commands:
 i	Insert new record
 f	Insert new record with an attachment
 s	Save attachment
+u	Update record
 n	Search records by note
 t	Search records by tag
 a	Show active records
+p	Show records with the \"private" tag
 h	Show hidden records
-u	Update record
 tl	Show tasks
 ext	Show records with attachments
 cal	Show calendar
@@ -201,6 +202,18 @@ q	Quit"""
 			for row in rows:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
 			print '\n-----'
+		elif command == 'p':
+
+# Show private records
+
+			searchtag = 'private'
+			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
+							 +  searchtag  +  "%' AND type='A' ORDER BY id ASC")
+			rows = cursor.fetchall()
+			print '\n-----'
+			for row in rows:
+				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+			print '\n-----'
 		elif command == 'a':
 
 # Show active records
@@ -254,7 +267,7 @@ q	Quit"""
 
 # Show tasks
 
-			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND type = 'A' ORDER BY due ASC")
+			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = 'A' ORDER BY due ASC")
 			rows = cursor.fetchall()
 			print '\n-----'
 			now = datetime.datetime.now()

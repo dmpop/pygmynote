@@ -20,6 +20,10 @@ Run the pygmynote.py script in the Terminal. Type "help" (without quotes) and pr
 
 ==CHANGELOG==
 
+VERSION 0.7.11 2011-11-17
+  * Added the ability to hide records containing the "private" tag and show them using the "p" command
+  * Minor cosmetic tweaks
+
 VERSION 0.7.9 2011-11-14
   * Minor fixes and cosmetic tweaks
 
