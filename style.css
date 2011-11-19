@@ -1,0 +1,42 @@
+/*
+Theme Name: ETC 
+Theme URI: http://www.ethanneuen.com/etc/
+Description: A theme inspired by DaringFireball. 
+[http://www.daringfireball.com]
+Author: Ethan Neuenswander
+Author URI: http://www.ethanneuen.com/
+Version: 1.0
+*/
+
+/*
+Basic Tags
+ */
+body { color: #e3e3e3; font: 13px/175% 'Droid Serif', serif; text-align:justify; background-color: #4a525a;}
+h2 { color: #e3e3e3; font: 31px/50% 'Artifika', serif; text-align:left; background-color: #4a525a; }
+a { color: #e3e3e3; text-decoration: none; border-bottom: 1px dotted; padding: 0.5px;}
+a:hover { color: #e3e3e3; }
+p.box { border-style:dashed; border-width:1px; padding:5px; width: 95px; }
+/*
+The End of Basic's
+*/
+/* 
+Main Tags; Play Nice with These Ones
+*/
+#content   { background-color: #4a525a; margin: 35px auto auto; width: 700px; height: auto }
+.titlebar {width: 700px; height: auto; background-color: #4a525a; text-align: right; padding-bottom: 1em; margin-right: 10px;}
+.text { width: 430px; height: auto; background-color: #4a525a; text-align: left; padding: 0px; margin:0px; margin-right: 20px; color:inherit; float: left;}
+.sidebar { width: 700px; height: auto; background-color: #4a525a; margin-right: 0px; float: top; text-align: left; }
+.sidetext { width: auto; padding: 5px; background-color: #606870; font: 13px/175% 'Droid Serif', serif; text-align: center; padding-left: 7px;}
+.footer { width: 515px; text-align: center; font-family: monospace; font-size: 9px; margin: 0px; margin-top: 35px; }
+/*
+Special Function Tags
+*/
+.titlebar p.slogan { font-size: 9px; font-family: monospace; margin: 0px; margin-top:3px; text-transform: capitalize;}
+.text p.date { font-size: 11px; text-align: right; padding-bottom: 3px; padding-top: 3px; background-color: #606870; color: #e3e3e3; padding-right: 5px; margin-bottom: 10px; font-family: monospace;}
+.sidebar ul  { list-style-type: square; padding-left: 25px; padding-right: 15px; text-align: left; }
+.titlebar h2  { color: #e3e3e3; font-size: 20px; font-weight: lighter; text-transform: uppercase; margin: 0; }
+.text p.content { color: #e3e3e3; font-size: inherit;}
+.text h2 { color: #e3e3e3; font-size: 12px; text-transform: uppercase; font-weight: lighter; margin: 0px;}
+.text p.info { color: #e3e3e3; font-size: 8px; font-weight: lighter; font-family: monospace; margin: 0px; padding-left: 1em;}
+.sidebar h2 { color: inherit; font-size: 15px; font-family: 'Droid Serif', serif; text-transform: uppercase; margin-top: 3px; padding-left: 5px;}
+.footer a:link { color: #e3e3e3; font-size: inherit;}
