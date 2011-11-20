@@ -4,7 +4,7 @@
 """
 Pygmynote is a command-line tool for storing and managing heterogeneous bit of data, including notes, tasks, links, and file attachments.Pygmynote is written in Python and uses a SQLite database as its back end.
 
-Thanks to Luis Cabrera Sauco for the SQLite and i18 support.
+Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 
 i18:
 ~~~~
@@ -22,7 +22,7 @@ $ LANGUAGE=es python pygmynote.py
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
 __copyright__ = 'Copyright 2011 Dmitri Popov'
 __license__ = 'GPLv3'
-__version__ = '0.7.9'
+__version__ = '0.7.13'
 __URL__ = 'http://www.github.com/dmpop'
 
 import sys
@@ -74,6 +74,7 @@ except:
 
 today = time.strftime('%Y-%m-%d')
 command = ''
+counter = 0
 
 print """\033[1;32m
            ( 0)>
@@ -104,8 +105,7 @@ if CREATE == True:
 
 print 'Today\'s deadlines:'
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> 'H' ORDER BY id ASC")
-rows = cursor.fetchall()
-for row in rows:
+for row in cursor:
 	print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
 
 while command != 'q':
@@ -130,7 +130,7 @@ a	Show active records
 p	Show records with the \"private" tag
 h	Show hidden records
 tl	Show tasks
-ext	Show records with attachments
+att	Show records with attachments
 cal	Show calendar
 w	Export records as CSV file
 d	Delete record by its ID
@@ -185,11 +185,13 @@ q	Quit"""
 			notetext = raw_input('Search notes for: ')
 			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
 							 +  notetext  +  "%'ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 't':
 
 # Search records by tag
@@ -197,11 +199,13 @@ q	Quit"""
 			searchtag = raw_input ('Search by tag: ')
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
 							 +  searchtag  +  "%' AND type='A' ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 'p':
 
 # Show private records
@@ -209,31 +213,37 @@ q	Quit"""
 			searchtag = 'private'
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
 							 +  searchtag  +  "%' AND type='A' ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 'a':
 
 # Show active records
 
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='A' ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 'h':
 
 # Show hidden records
 
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='H' ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 'u':
 
 # Update note
@@ -268,23 +278,27 @@ q	Quit"""
 # Show tasks
 
 			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = 'A' ORDER BY due ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
 			now = datetime.datetime.now()
 			calendar.prmonth(now.year, now.month)
-			for row in rows:
+			for row in cursor:
 				print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
+				counter = counter + 1
 			print '\n-----'
-		elif command == 'ext':
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
+		elif command == 'att':
 
 # Show records with attachments
 
 			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='A' ORDER BY id ASC")
-			rows = cursor.fetchall()
 			print '\n-----'
-			for row in rows:
+			for row in cursor:
 				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m \033[1;43m%s\033[1;m' % (row[0], row[1], row[2], row[3])
+				counter = counter + 1
 			print '\n-----'
+			print '\033[1;34mRecord count:\033[1;m %s' % counter
+			counter = 0
 		elif command == 'cal':
 
 # Show calendar
@@ -307,10 +321,9 @@ q	Quit"""
 # Save all notes as pygmynote.txt
 
 			cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
-			rows = cursor.fetchall()
 			if os.path.exists('pygmynote.txt'):
 				os.remove('pygmynote.txt')
-			for row in rows:
+			for row in cursor:
 				filename = 'pygmynote.txt'
 				file = open(filename, 'a')
 				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
