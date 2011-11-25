@@ -86,7 +86,7 @@ Pygmynote is ready. Pile up!
 
 def escapechar(sel):
 	sel=sel.replace("\'", "\''")
-	sel=sel.replace("\"", "\\\"")
+	sel=sel.replace("\"", "\"""")
 	return sel
 
 

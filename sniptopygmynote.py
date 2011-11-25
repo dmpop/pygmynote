@@ -10,7 +10,7 @@ cursor = conn.cursor()
 
 def escapechar(sel):
 	sel=sel.replace("\'", "\''")
-	sel=sel.replace("\"", "\\\"")
+	sel=sel.replace("\"", "\"""")
 	return sel
 
 clipboard = gtk.clipboard_get()
