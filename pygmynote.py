@@ -20,7 +20,7 @@ $ LANGUAGE=es python pygmynote.py
 """
 
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
-__copyright__ = 'Copyright 2011 Dmitri Popov'
+__copyright__ = 'Copyright 2011, 2012 Dmitri Popov'
 __license__ = 'GPLv3'
 __version__ = '0.7.13'
 __URL__ = 'http://www.github.com/dmpop'
@@ -130,8 +130,8 @@ a	Show active records
 p	Show records with the \"private" tag
 h	Show hidden records
 tl	Show tasks
-att	Show records with attachments
-cal	Show calendar
+at	Show records with attachments
+cl	Show calendar
 w	Export records as CSV file
 d	Delete record by its ID
 q	Quit"""
@@ -287,7 +287,7 @@ q	Quit"""
 			print '\n-----'
 			print '\033[1;34mRecord count:\033[1;m %s' % counter
 			counter = 0
-		elif command == 'att':
+		elif command == 'at':
 
 # Show records with attachments
 
@@ -299,14 +299,14 @@ q	Quit"""
 			print '\n-----'
 			print '\033[1;34mRecord count:\033[1;m %s' % counter
 			counter = 0
-		elif command == 'cal':
+		elif command == 'cl':
 
 # Show calendar
 
-			whichmonth = input('Month (1-12): ')
+			monthnumber = input('Month (1-12): ')
 			date = time.localtime()[:2]
 			print '\n'
-			calendar.prmonth(date[0], whichmonth)
+			calendar.prmonth(date[0], monthnumber)
 			print
 		elif command == 'd':
 
