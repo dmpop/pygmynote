@@ -131,7 +131,6 @@ p	Show records with the \"private" tag
 h	Show hidden records
 tl	Show tasks
 at	Show records with attachments
-cl	Show calendar
 w	Export records as CSV file
 d	Delete record by its ID
 q	Quit"""
@@ -299,15 +298,6 @@ q	Quit"""
 			print '\n-----'
 			print '\033[1;34mRecord count:\033[1;m %s' % counter
 			counter = 0
-		elif command == 'cl':
-
-# Show calendar
-
-			monthnumber = input('Month (1-12): ')
-			date = time.localtime()[:2]
-			print '\n'
-			calendar.prmonth(date[0], monthnumber)
-			print
 		elif command == 'd':
 
 # Delete note by its ID
