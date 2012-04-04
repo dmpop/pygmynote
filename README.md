@@ -14,4 +14,4 @@ Source code: [https://github.com/dmpop/pygmynote](https://github.com/dmpop/pygmy
 
 ##USAGE
 
-Run the _pygmynote.py_ script in the terminal. Type __help__ and press __Enter__ to view the available commands.
+Run the _pygmynote.py_ script in the terminal. Type __help__ and press `Enter` to view the available commands.
