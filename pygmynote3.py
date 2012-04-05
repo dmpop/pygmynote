@@ -149,7 +149,7 @@ q	Quit""")
 			notetags = escapechar(input('Tags: '))
 			notefile = escapechar(input('Enter path to file: '))
 			notetype='A'
-			f=open(notefile, 'rb')
+			f=open(notefile.rstrip(), 'rb')
 			ablob = f.read()
 			f.close()
 			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + notetext + "', '" + notetags + "', '" + notetype + "', '"  + notefile[-3:] + "', ?)", [sqlite.Binary(ablob)])
