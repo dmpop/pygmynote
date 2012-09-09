@@ -120,7 +120,7 @@ n	Search records by note
 t	Search records by tag
 a	Show active records
 p	Show records with the \"private" tag
-h	Show hidden records
+h	Show archived records
 tl	Show tasks
 at	Show records with attachments
 w	Export records as CSV file
@@ -134,10 +134,10 @@ q	Quit""")
 			ntext = escapechar(input('Note: '))
 			ntags = escapechar(input('Tags: '))
 			ndue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
-			nstatus = '1'
+			ntype = '1'
 			sqlquery = \
 				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
-				% (ntext, ndue, ntags, nstatus)
+				% (ntext, ndue, ntags, ntype)
 			cursor.execute(sqlquery)
 			conn.commit()
 			print ('\nRecord has been added.')
@@ -148,11 +148,11 @@ q	Quit""")
 			ntext = escapechar(input('Note: '))
 			ntags = escapechar(input('Tags: '))
 			notefile = escapechar(input('Enter path to file: '))
-			nstatus='1'
+			ntype='1'
 			f=open(notefile.rstrip(), 'rb')
 			ablob = f.read()
 			f.close()
-			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + ntext + "', '" + ntags + "', '" + nstatus + "', '"  + notefile[-3:] + "', ?)", [sqlite.Binary(ablob)])
+			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + ntext + "', '" + ntags + "', '" + ntype + "', '"  + notefile[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
 			print ('\nRecord has been added.')
 		elif command == 's':
@@ -240,8 +240,8 @@ q	Quit""")
 # Update note
 
 			recid = input('Record id: ')
-			nstatus = input('Update note [0], tags [1], due date [2], or archive [3]: ')
-			if nstatus == '0':
+			ntype = input('Update note [0], tags [1], due date [2], or archive [3]: ')
+			if ntype == '0':
 				cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recid  +  "'")
 				row = cursor.fetchone()
 				print ('Current contents: %s' % row[1])
@@ -249,18 +249,18 @@ q	Quit""")
 				sqlstr = escapechar(noteupdate)
 				cursor.execute("UPDATE notes SET note='"  +  sqlstr
 								 +  "' WHERE id='"  +  recid  +  "'")
-			elif nstatus == '1':
+			elif ntype == '1':
 				tagupdate = input('Tags: ')
 				sqlstr = escapechar(tagupdate)
 				cursor.execute("UPDATE notes SET tags='"  +  sqlstr
 								 +  "' WHERE id='"  +  recid  +  "'")
-			elif nstatus == '2':
+			elif ntype == '2':
 				dueupdate = input('Due date: ')
 				cursor.execute("UPDATE notes SET due='"  +  dueupdate
 								 +  "' WHERE id='"  +  recid  +  "'")
 			else:
-				nstatus = '0'
-				cursor.execute("UPDATE notes SET type='"  +  nstatus
+				ntype = '0'
+				cursor.execute("UPDATE notes SET type='"  +  ntype
 								 +  "' WHERE id='"  +  recid  +  "'")
 			conn.commit()
 			print ('\nRecord has been updated.')
