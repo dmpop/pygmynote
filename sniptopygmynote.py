@@ -24,7 +24,7 @@ tags.Destroy()
 
 notetext = escapechar(snip)
 notedue = ""
-notetype = "A"
+notetype = "1"
 sqlquery = \
 "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
 % (notetext, notedue, notetags, notetype)
