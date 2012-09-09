@@ -119,8 +119,7 @@ u	Update record
 n	Search records by note
 t	Search records by tag
 a	Show active records
-p	Show records with the \"private" tag
-h	Show archived records
+ar	Show archived records
 tl	Show tasks
 at	Show records with attachments
 w	Export records as CSV file
@@ -131,13 +130,13 @@ q	Quit""")
 
 # Insert new record
 
-			ntext = escapechar(input('Note: '))
-			ntags = escapechar(input('Tags: '))
-			ndue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
-			ntype = '1'
+			rtxt = escapechar(input('Note: '))
+			rtags = escapechar(input('Tags: '))
+			rdue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
+			rtype = '1'
 			sqlquery = \
 				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
-				% (ntext, ndue, ntags, ntype)
+				% (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
 			print ('\nRecord has been added.')
@@ -145,14 +144,14 @@ q	Quit""")
 
 # Insert new record with file
 
-			ntext = escapechar(input('Note: '))
-			ntags = escapechar(input('Tags: '))
-			notefile = escapechar(input('Enter path to file: '))
-			ntype='1'
-			f=open(notefile.rstrip(), 'rb')
+			rtxt = escapechar(input('Note: '))
+			rtags = escapechar(input('Tags: '))
+			rfile = escapechar(input('Enter path to file: '))
+			rtype='1'
+			f=open(rfile.rstrip(), 'rb')
 			ablob = f.read()
 			f.close()
-			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + ntext + "', '" + ntags + "', '" + ntype + "', '"  + notefile[-3:] + "', ?)", [sqlite.Binary(ablob)])
+			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
 			print ('\nRecord has been added.')
 		elif command == 's':
@@ -173,9 +172,9 @@ q	Quit""")
 
 # Search records by note
 
-			ntext = input('Search notes for: ')
+			rtxt = input('Search notes for: ')
 			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
-							 +  ntext  +  "%'ORDER BY id ASC")
+							 +  rtxt  +  "%'ORDER BY id ASC")
 			print ("\n-----")
 			for row in cursor:
 				print ("\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2]))
@@ -197,20 +196,6 @@ q	Quit""")
 			print ('\n-----')
 			print ('\033[1;34mRecord count:\033[1;m %s' % counter)
 			counter = 0
-		elif command == 'p':
-
-# Show private records
-
-			stag = 'private'
-			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
-							 +  stag  +  "%' AND type='1' ORDER BY id ASC")
-			print ("\n-----")
-			for row in cursor:
-				print ("\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2]))
-				counter = counter + 1
-			print ('\n-----')
-			print ('\033[1;34mRecord count:\033[1;m %s' % counter)
-			counter = 0
 		elif command == 'a':
 
 # Show active records
@@ -223,9 +208,9 @@ q	Quit""")
 			print ('\n-----')
 			print ('\033[1;34mRecord count:\033[1;m %s' % counter)
 			counter = 0
-		elif command == 'h':
+		elif command == 'ar':
 
-# Show hidden records
+# Show archived records
 
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
 			print ('\n-----')
@@ -237,30 +222,30 @@ q	Quit""")
 			counter = 0
 		elif command == 'u':
 
-# Update note
+# Update record
 
 			recid = input('Record id: ')
-			ntype = input('Update note [0], tags [1], due date [2], or archive [3]: ')
-			if ntype == '0':
+			rtype = input('Update note [0], tags [1], due date [2], or archive [3]: ')
+			if rtype == '0':
 				cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recid  +  "'")
 				row = cursor.fetchone()
 				print ('Current contents: %s' % row[1])
-				noteupdate = input('Note: ')
-				sqlstr = escapechar(noteupdate)
+				noteupd = input('Note: ')
+				sqlstr = escapechar(noteupd)
 				cursor.execute("UPDATE notes SET note='"  +  sqlstr
 								 +  "' WHERE id='"  +  recid  +  "'")
-			elif ntype == '1':
-				tagupdate = input('Tags: ')
-				sqlstr = escapechar(tagupdate)
+			elif rtype == '1':
+				tagupd = input('Tags: ')
+				sqlstr = escapechar(tagupd)
 				cursor.execute("UPDATE notes SET tags='"  +  sqlstr
 								 +  "' WHERE id='"  +  recid  +  "'")
-			elif ntype == '2':
-				dueupdate = input('Due date: ')
-				cursor.execute("UPDATE notes SET due='"  +  dueupdate
+			elif rtype == '2':
+				dueupd = input('Due date: ')
+				cursor.execute("UPDATE notes SET due='"  +  dueupd
 								 +  "' WHERE id='"  +  recid  +  "'")
 			else:
-				ntype = '0'
-				cursor.execute("UPDATE notes SET type='"  +  ntype
+				rtype = '0'
+				cursor.execute("UPDATE notes SET type='"  +  rtype
 								 +  "' WHERE id='"  +  recid  +  "'")
 			conn.commit()
 			print ('\nRecord has been updated.')
@@ -292,7 +277,7 @@ q	Quit""")
 			counter = 0
 		elif command == 'd':
 
-# Delete note by its ID
+# Delete record by its ID
 
 			recid = input('Delete note ID: ')
 			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
@@ -300,7 +285,7 @@ q	Quit""")
 			conn.commit()
 		elif command == 'w':
 
-# Save all notes as pygmynote.txt
+# Save all records in pygmynote.txt
 
 			cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
 			if os.path.exists('pygmynote.txt'):
