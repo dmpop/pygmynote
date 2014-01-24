@@ -20,9 +20,9 @@ $ LANGUAGE=es python pygmynote.py
 """
 
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
-__copyright__ = 'Copyright 2011, 2012 Dmitri Popov'
+__copyright__ = 'Copyleft 2011-2014 Dmitri Popov'
 __license__ = 'GPLv3'
-__version__ = '0.7.13'
+__version__ = '0.7.15'
 __URL__ = 'http://www.github.com/dmpop'
 
 import sys
@@ -37,40 +37,40 @@ DEBUG = False
 DOMAIN = 'pygmynote'
 
 try:
-	TRANSLATION = gettext.translation(DOMAIN, '.')
-	_ = TRANSLATION.ugettext
+    TRANSLATION = gettext.translation(DOMAIN, '.')
+    _ = TRANSLATION.ugettext
 except IOError:
-	_ = gettext.gettext
+    _ = gettext.gettext
 
 try:
-	import sqlite3 as sqlite
-	if DEBUG == True:
-		print 'Use sqlite3, with python %s' % sys.version
+    import sqlite3 as sqlite
+    if DEBUG == True:
+        print 'Use sqlite3, with python %s' % sys.version
 except ImportError:
-	from pysqlite2 import dbapi2 as sqlite
-	if DEBUG == True:
-		print 'Use pysqlite2, with python %s' % sys.version
+    from pysqlite2 import dbapi2 as sqlite
+    if DEBUG == True:
+        print 'Use pysqlite2, with python %s' % sys.version
 
 DB = 'pygmynote.db'
 ENC = 'utf-8'
 
 if os.path.exists(DB):
-	if DEBUG == True:
-		print 'The database already exists.'
-	CREATE = False
+    if DEBUG == True:
+        print 'The database already exists.'
+    CREATE = False
 else:
-	if DEBUG == False:
-		print 'Creating a new database.'
-	CREATE = True
+    if DEBUG == False:
+        print 'Creating a new database.'
+    CREATE = True
 
 try:
-	if DEBUG == False:
-		conn = sqlite.connect(DB)
-	else:
-		conn = sqlite.connect(DB, timeout=0.5, encoding=ENC)
-	cursor = conn.cursor()
+    if DEBUG == False:
+        conn = sqlite.connect(DB)
+    else:
+        conn = sqlite.connect(DB, timeout=0.5, encoding=ENC)
+    cursor = conn.cursor()
 except:
-	sys.exit('Connection to the SQLite database failed!')
+    sys.exit('Connection to the SQLite database failed!')
 
 today = time.strftime('%Y-%m-%d')
 command = ''
@@ -82,233 +82,237 @@ print """\033[1;32m
             ||
 ==========="=="=============
 Pygmynote is ready. Pile up!
-============================\033[1;m\n"""
+============================\033[1;m\n
+\033[1;36mType \"help\" and press ENTER\033[1;m"""
 
 def escapechar(sel):
-	sel=sel.replace("\'", "\''")
-	sel=sel.replace("\"", "\"""")
-	return sel
+    sel=sel.replace("\'", "\''")
+    sel=sel.replace("\"", "\"""")
+    return sel
 
 
 if CREATE == True:
-	CREATE_SQL = \
-		"CREATE TABLE notes (\
-		id INTEGER PRIMARY KEY UNIQUE NOT NULL,\
-		note VARCHAR(1024),\
-		file BLOB,\
-		due DATE,\
-		type VARCHAR(3),\
-		ext VARCHAR(3),\
-		tags VARCHAR(256));"
-	cursor.execute(CREATE_SQL)
-	conn.commit()
+    CREATE_SQL = \
+        "CREATE TABLE notes (\
+        id INTEGER PRIMARY KEY UNIQUE NOT NULL,\
+        note VARCHAR(1024),\
+        file BLOB,\
+        due DATE,\
+        type VARCHAR(3),\
+        ext VARCHAR(3),\
+        tags VARCHAR(256));"
+    cursor.execute(CREATE_SQL)
+    conn.commit()
 
-print 'Today\'s deadlines:'
+print """
+------------------
+Today\'s deadlines:
+------------------"""
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
-	print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
+    print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
 
 while command != 'q':
 
-	try:
+    try:
 
-		command = raw_input('\n>')
+        command = raw_input('\n>')
 
-		if command == 'help':
-			print """
+        if command == 'help':
+            print """
 ===================
 Pygmynote commands:
 ===================
 
-i	Insert new record
-f	Insert new record with an attachment
-s	Save attachment
-u	Update record
-n	Search records by note
-t	Search records by tag
-a	Show active records
-ar	Show archived records
-tl	Show tasks
-at	Show records with attachments
-w	Export records as CSV file
-d	Delete record by its ID
-q	Quit"""
+i    Insert new record
+f    Insert new record with an attachment
+s    Save attachment
+u    Update record
+n    Search records by note
+t    Search records by tag
+a    Show active records
+ar    Show archived records
+tl    Show tasks
+at    Show records with attachments
+w    Export records as CSV file
+d    Delete record by its ID
+q    Quit"""
 
-		elif command == 'i':
+        elif command == 'i':
 
 # Insert new record
 
-			rtxt = escapechar(raw_input('Note: '))
-			rtags = escapechar(raw_input('Tags: '))
-			rdue = raw_input('Due date (yyyy-mm-dd). Press Enter to skip: ')
-			rtype = "1"
-			sqlquery = \
-				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
-				% (rtxt, rdue, rtags, rtype)
-			cursor.execute(sqlquery)
-			conn.commit()
-			print '\nRecord has been added.'
-		elif command == 'f':
+            rtxt = escapechar(raw_input('Note: '))
+            rtags = escapechar(raw_input('Tags: '))
+            rdue = raw_input('Due date (yyyy-mm-dd). Press Enter to skip: ')
+            rtype = "1"
+            sqlquery = \
+                "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
+                % (rtxt, rdue, rtags, rtype)
+            cursor.execute(sqlquery)
+            conn.commit()
+            print '\nRecord has been added.'
+        elif command == 'f':
 
 # Insert new record with file
 
-			rtxt = escapechar(raw_input('Note: '))
-			rtags = escapechar(raw_input('Tags: '))
-			rfile = escapechar(raw_input('Enter path to file: '))
-			rtype="1"
-			f=open(rfile.rstrip(), 'rb')
-			ablob = f.read()
-			f.close()
-			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
-			conn.commit()
-			print '\nRecord has been added.'
-		elif command == 's':
+            rtxt = escapechar(raw_input('Note: '))
+            rtags = escapechar(raw_input('Tags: '))
+            rfile = escapechar(raw_input('Enter path to file: '))
+            rtype="1"
+            f=open(rfile.rstrip(), 'rb')
+            ablob = f.read()
+            f.close()
+            cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
+            conn.commit()
+            print '\nRecord has been added.'
+        elif command == 's':
 
 # Save file
 
-			recid = raw_input('Record id: ')
-			outfile=raw_input('Specify full path and file name (e.g., /home/user/loremipsum.odt): ')
-			f=open(outfile, 'wb')
-			cursor.execute ("SELECT file FROM notes WHERE id='"  +  recid  +  "'")
-			ablob = cursor.fetchone()
-			f.write(ablob[0])
-			f.close()
-			cursor.close()
-			conn.commit()
-			print '\nFile has been saved.'
-		elif command == 'n':
+            recid = raw_input('Record id: ')
+            outfile=raw_input('Specify full path and file name (e.g., /home/user/loremipsum.odt): ')
+            f=open(outfile, 'wb')
+            cursor.execute ("SELECT file FROM notes WHERE id='"  +  recid  +  "'")
+            ablob = cursor.fetchone()
+            f.write(ablob[0])
+            f.close()
+            cursor.close()
+            conn.commit()
+            print '\nFile has been saved.'
+        elif command == 'n':
 
 # Search records by note
 
-			rtxt = raw_input('Search notes for: ')
-			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
-							 +  rtxt  +  "%'ORDER BY id ASC")
-			print '\n-----'
-			for row in cursor:
-				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 't':
+            rtxt = raw_input('Search notes for: ')
+            cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
+                             +  rtxt  +  "%'ORDER BY id ASC")
+            print '\n-----'
+            for row in cursor:
+                print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 't':
 
 # Search records by tag
 
-			stag = raw_input ('Search by tag: ')
-			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
-							 +  stag  +  "%' AND type='1' ORDER BY id ASC")
-			print '\n-----'
-			for row in cursor:
-				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 'a':
+            stag = raw_input ('Search by tag: ')
+            cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
+                             +  stag  +  "%' AND type='1' ORDER BY id ASC")
+            print '\n-----'
+            for row in cursor:
+                print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 'a':
 
 # Show active records
 
-			cursor.execute("SELECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
-			print '\n-----'
-			for row in cursor:
-				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 'ar':
+            cursor.execute("SELECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
+            print '\n-----'
+            for row in cursor:
+                print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 'ar':
 
 # Show archived records
 
-			cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
-			print '\n-----'
-			for row in cursor:
-				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 'u':
+            cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
+            print '\n-----'
+            for row in cursor:
+                print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 'u':
 
 # Update record
 
-			recid = raw_input('Record id: ')
-			rtype = raw_input('Update note [0], tags [1], due date [2], or archive [3]: ')
-			if rtype == '0':
-				cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recid  +  "'")
-				row = cursor.fetchone()
-				print 'Current contents: %s' % row[1]
-				noteupd = raw_input('Note: ')
-				sqlstr = escapechar(noteupd)
-				cursor.execute("UPDATE notes SET note='"  +  sqlstr
-								 +  "' WHERE id='"  +  recid  +  "'")
-			elif rtype == '1':
-				tagupd = raw_input('Tags: ')
-				sqlstr = escapechar(tagupd)
-				cursor.execute("UPDATE notes SET tags='"  +  sqlstr
-								 +  "' WHERE id='"  +  recid  +  "'")
-			elif rtype == '2':
-				dueupd = raw_input('Due date: ')
-				cursor.execute("UPDATE notes SET due='"  +  dueupd
-								 +  "' WHERE id='"  +  recid  +  "'")
-			else:
-				rtype = '0'
-				cursor.execute("UPDATE notes SET type='"  +  rtype
-								 +  "' WHERE id='"  +  recid  +  "'")
-			conn.commit()
-			print '\nRecord has been updated.'
-		elif command == 'tl':
+            recid = raw_input('Record id: ')
+            rtype = raw_input('Update note [0], tags [1], due date [2], or archive [3]: ')
+            if rtype == '0':
+                cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recid  +  "'")
+                row = cursor.fetchone()
+                print 'Current contents: %s' % row[1]
+                noteupd = raw_input('Note: ')
+                sqlstr = escapechar(noteupd)
+                cursor.execute("UPDATE notes SET note='"  +  sqlstr
+                                 +  "' WHERE id='"  +  recid  +  "'")
+            elif rtype == '1':
+                tagupd = raw_input('Tags: ')
+                sqlstr = escapechar(tagupd)
+                cursor.execute("UPDATE notes SET tags='"  +  sqlstr
+                                 +  "' WHERE id='"  +  recid  +  "'")
+            elif rtype == '2':
+                dueupd = raw_input('Due date: ')
+                cursor.execute("UPDATE notes SET due='"  +  dueupd
+                                 +  "' WHERE id='"  +  recid  +  "'")
+            else:
+                rtype = '0'
+                cursor.execute("UPDATE notes SET type='"  +  rtype
+                                 +  "' WHERE id='"  +  recid  +  "'")
+            conn.commit()
+            print '\nRecord has been updated.'
+        elif command == 'tl':
 
 # Show tasks
 
-			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = '1' ORDER BY due ASC")
-			print '\n-----'
-			now = datetime.datetime.now()
-			calendar.prmonth(now.year, now.month)
-			for row in cursor:
-				print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 'at':
+            cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = '1' ORDER BY due ASC")
+            print '\n-----'
+            now = datetime.datetime.now()
+            calendar.prmonth(now.year, now.month)
+            for row in cursor:
+                print '\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2], row[3])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 'at':
 
 # Show records with attachments
 
-			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
-			print '\n-----'
-			for row in cursor:
-				print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m \033[1;43m%s\033[1;m' % (row[0], row[1], row[2], row[3])
-				counter = counter + 1
-			print '\n-----'
-			print '\033[1;34mRecord count:\033[1;m %s' % counter
-			counter = 0
-		elif command == 'd':
+            cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
+            print '\n-----'
+            for row in cursor:
+                print '\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m \033[1;43m%s\033[1;m' % (row[0], row[1], row[2], row[3])
+                counter = counter + 1
+            print '\n-----'
+            print '\033[1;34mRecord count:\033[1;m %s' % counter
+            counter = 0
+        elif command == 'd':
 
 # Delete record by its ID
 
-			recid = raw_input('Delete note ID: ')
-			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
-			print '\nRecord has been deleted.'
-			conn.commit()
-		elif command == 'w':
+            recid = raw_input('Delete note ID: ')
+            cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
+            print '\nRecord has been deleted.'
+            conn.commit()
+        elif command == 'w':
 
 # Save all records in pygmynote.txt
 
-			cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
-			if os.path.exists('pygmynote.txt'):
-				os.remove('pygmynote.txt')
-			for row in cursor:
-				fname = 'pygmynote.txt'
-				file = open(fname, 'a')
-				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
-				file.close()
-			print '\nRecords have been saved in the pygmynote.txt file.'
+            cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
+            if os.path.exists('pygmynote.txt'):
+                os.remove('pygmynote.txt')
+            for row in cursor:
+                fname = 'pygmynote.txt'
+                file = open(fname, 'a')
+                file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
+                file.close()
+            print '\nRecords have been saved in the pygmynote.txt file.'
 
-	except:
-		print '\n\n\033[1;31mSomething went wrong. Try again.\033[1;m'
+    except:
+        print '\n\n\033[1;31mSomething went wrong. Try again.\033[1;m'
 
-		continue
+        continue
 
 print """\033[1;33m
         ( 0)>

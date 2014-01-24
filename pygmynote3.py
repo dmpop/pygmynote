@@ -74,7 +74,8 @@ print ("""\033[1;32m
             ||
 ==========="=="=============
 Pygmynote is ready. Pile up!
-============================\033[1;m\n""")
+============================\033[1;m\n
+\033[1;36mType \"help\" and press ENTER\033[1;m""")
 
 def escapechar(sel):
 	sel=sel.replace("\'", "\''")
@@ -95,7 +96,10 @@ if CREATE == True:
 	cursor.execute(CREATE_SQL)
 	conn.commit()
 
-print ("Today\"s deadlines:")
+print ("""
+------------------
+Today\'s deadlines:
+------------------""")
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
 	print ("\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2], row[3]))
