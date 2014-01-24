@@ -53,7 +53,7 @@ except ImportError:
 	if DEBUG == True:
 		print 'Use pysqlite2, with python %s' % sys.version
 
-DB = 'pygmynote.db'
+DB = 'pygmynote.sqlite'
 ENC = 'utf-8'
 
 if os.path.exists(DB):

@@ -45,7 +45,7 @@ try:
 except IOError:
 	_ = gettext.gettext
 
-DB = "pygmynote.db"
+DB = "pygmynote.sqlite"
 ENC = "utf-8"
 
 if os.path.exists(DB):
