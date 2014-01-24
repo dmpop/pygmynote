@@ -4,7 +4,7 @@ Pygmynote is a command-line tool for storing and managing heterogeneous bit of d
 
 ##Installation
 
-Clone the repository using the `git clone https://github.com/dmpop/pygmynote` command. Done!
+Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git` command. Done!
 
 ##Usage
 
