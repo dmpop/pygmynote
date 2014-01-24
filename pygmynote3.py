@@ -32,6 +32,8 @@ import time
 import calendar
 import gettext
 import sqlite3 as sqlite
+import tempfile
+import subprocess
 
 DEBUG = False
 
@@ -69,9 +71,9 @@ command = ""
 counter = 0
 
 print ("""\033[1;32m
-           ( 0)>
-          (( *))
-            ||
+		   ( 0)>
+		  (( *))
+			||
 ==========="=="=============
 Pygmynote is ready. Pile up!
 ============================\033[1;m\n
@@ -117,6 +119,7 @@ Pygmynote commands:
 ===================
 
 i	Insert new record
+l	Insert long record (requires the nano editor)
 f	Insert new record with an attachment
 s	Save attachment
 u	Update record
@@ -135,6 +138,25 @@ q	Quit""")
 # Insert new record
 
 			rtxt = escapechar(input('Note: '))
+			rtags = escapechar(input('Tags: '))
+			rdue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
+			rtype = '1'
+			sqlquery = \
+				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
+				% (rtxt, rdue, rtags, rtype)
+			cursor.execute(sqlquery)
+			conn.commit()
+			print ('\nRecord has been added.')
+		elif command == 'l':
+		
+		# Insert long record
+			# http://stackoverflow.com/questions/3076798/start-nano-as-a-subprocess-from-python-capture-input
+			f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
+			n = f.name
+			f.close()
+			subprocess.call(['nano', n])
+			with open(n) as f:
+				rtxt = escapechar(f.read())
 			rtags = escapechar(input('Tags: '))
 			rdue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
 			rtype = '1'
@@ -307,9 +329,9 @@ q	Quit""")
 		continue
 
 print ("""\033[1;33m
-        ( 0)>
-       (( *))
-         ||
+		( 0)>
+	   (( *))
+		 ||
 ========"=="=========
 Bye! Have a nice day.
 =====================\033[1;m\n""")
