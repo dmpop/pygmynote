@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Pygmynote is a command-line tool for storing and managing heterogeneous bit of data, including notes, tasks, links, and file attachments.Pygmynote is written in Python and uses a SQLite database as its back end.
+Pygmynote is a command-line tool for storing and managing heterogeneous bit of data like notes, tasks, links, file attachments, etc. Pygmynote is written in Python and uses a SQLite database as its back end.
 
 Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 
@@ -20,10 +20,10 @@ $ LANGUAGE=es python pygmynote.py
 """
 
 __author__ = "Dmitri Popov [dmpop@linux.com]"
-__copyright__ = "Copyright 2011, 2012 Dmitri Popov"
+__copyright__ = "Copyleft 2011-2014 Dmitri Popov"
 __license__ = "GPLv3"
-__version__ = "0.7.13"
-__URL__ = "http://www.github.com/dmpop"
+__version__ = "0.9.01"
+__URL__ = "http://www.github.com/dmpop/pygmynote"
 
 import sys
 import datetime
@@ -36,7 +36,6 @@ import tempfile
 import subprocess
 
 DEBUG = False
-
 DOMAIN = "pygmynote"
 
 try:
