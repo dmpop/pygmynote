@@ -35,6 +35,10 @@ import sqlite3 as sqlite
 import tempfile
 import subprocess
 
+EDITOR = 'nano'
+DB = 'pygmynote.sqlite'
+
+ENC = "utf-8"
 DEBUG = False
 DOMAIN = "pygmynote"
 
@@ -44,8 +48,6 @@ try:
 except IOError:
 	_ = gettext.gettext
 
-DB = "pygmynote.sqlite"
-ENC = "utf-8"
 
 if os.path.exists(DB):
 	if DEBUG == True:
@@ -118,7 +120,7 @@ Pygmynote commands:
 ===================
 
 i	Insert new record
-l	Insert long record (requires the nano editor)
+l	Insert long record
 f	Insert new record with an attachment
 s	Save attachment
 u	Update record
@@ -153,7 +155,7 @@ q	Quit""")
 			f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 			n = f.name
 			f.close()
-			subprocess.call(['nano', n])
+			subprocess.call([EDITOR, n])
 			with open(n) as f:
 				rtxt = escapechar(f.read())
 			rtags = escapechar(input('Tags: '))
@@ -258,7 +260,7 @@ q	Quit""")
 				n = f.name
 				f.write('%s' % row[1])
 				f.close()
-				subprocess.call(['nano', n])
+				subprocess.call([EDITOR, n])
 				with open(n) as f:
 					noteupd = escapechar(f.read())
 				sqlstr = escapechar(noteupd)

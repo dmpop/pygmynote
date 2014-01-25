@@ -34,6 +34,10 @@ import gettext
 import tempfile
 import subprocess
 
+EDITOR = 'nano'
+DB = 'pygmynote.sqlite'
+
+ENC = 'utf-8'
 DEBUG = False
 DOMAIN = 'pygmynote'
 
@@ -51,9 +55,6 @@ except ImportError:
 	from pysqlite2 import dbapi2 as sqlite
 	if DEBUG == True:
 		print 'Use pysqlite2, with python %s' % sys.version
-
-DB = 'pygmynote.sqlite'
-ENC = 'utf-8'
 
 if os.path.exists(DB):
 	if DEBUG == True:
@@ -126,7 +127,7 @@ Pygmynote commands:
 ===================
 
 i	Insert new record
-l	Insert long record (requires the nano editor)
+l	Insert long record
 f	Insert new record with an attachment
 s	Save attachment
 u	Update record
@@ -161,7 +162,7 @@ q	Quit"""
 			f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 			n = f.name
 			f.close()
-			subprocess.call(['nano', n])
+			subprocess.call([EDITOR, n])
 			with open(n) as f:
 				rtxt = escapechar(f.read())
 			rtags = escapechar(raw_input('Tags: '))
@@ -266,7 +267,7 @@ q	Quit"""
 				n = f.name
 				f.write('%s' % row[1])
 				f.close()
-				subprocess.call(['nano', n])
+				subprocess.call([EDITOR, n])
 				with open(n) as f:
 					noteupd = escapechar(f.read())
 				sqlstr = escapechar(noteupd)
