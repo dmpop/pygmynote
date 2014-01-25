@@ -139,7 +139,7 @@ q	Quit""")
 
 			rtxt = escapechar(input('Note: '))
 			rtags = escapechar(input('Tags: '))
-			rdue = input('Due date (yyyy-mm-dd). Press Enter to skip: ')
+			rdue = input('Due date (yyyy-mm-dd). Press ENTER to skip: ')
 			rtype = '1'
 			sqlquery = \
 				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
@@ -255,8 +255,13 @@ q	Quit""")
 			if rtype == '0':
 				cursor.execute ("SELECT id, note FROM notes WHERE id='"  +  recid  +  "'")
 				row = cursor.fetchone()
-				print ('Current contents: %s' % row[1])
-				noteupd = input('Note: ')
+				f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
+				n = f.name
+				f.write('%s' % row[1])
+				f.close()
+				subprocess.call(['nano', n])
+				with open(n) as f:
+					noteupd = escapechar(f.read())
 				sqlstr = escapechar(noteupd)
 				cursor.execute("UPDATE notes SET note='"  +  sqlstr
 								 +  "' WHERE id='"  +  recid  +  "'")
