@@ -329,7 +329,7 @@ q	Quit""")
 			print ('\nRecords have been saved in the pygmynote.txt file.')
 
 	except:
-		print ('\n\n\033[1;31mSomething went wrong. Try again.\033[1;m')
+		print ('\n\nError: \033[1;31m' + str(sys.exc_info()[0]) + '\033[1;m Please try again.')
 
 		continue
 
