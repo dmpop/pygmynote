@@ -15,6 +15,10 @@ Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git
 
 Open terminal, switch to the *pygmynote* directory and run the _pygmynote.py_ script in the terminal. Type __help__ and press `Enter` to list the available commands.
 
+###Pygmysnip
+
+The Pygmysnip part of Pygmynote can be used to publish records in the *pygmynote.sqlite* database containing *snip* tag. Pygmysnip requires a machine running Apache (or another web server) and PHP. To install Pygmysnip, copy the *pygmynote.sqlite* database into the the *pygmysnip* directory, and move the latter to the root of your server. To access Pygmysnip, point a browser to http://127.0.0.1/pygmysnip (replace *127.0.0.1* with the actual IP address or domain name of your server).
+
 ##License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
