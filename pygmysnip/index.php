@@ -35,7 +35,7 @@
 	
 	?>
 	
-	<center><div class="footer">Pygmysnip is based on <a href="https://github.com/dmpop/pygmynote">Pygmynote</a></div></center>
+	<center><div class="footer">Pygmysnip is a part of <a href="https://github.com/dmpop/pygmynote">Pygmynote</a></div></center>
 	
 	</body>
 </html>
