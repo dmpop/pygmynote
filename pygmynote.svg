@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="619"
+   height="229"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="pygmynote.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="329.10976"
+     inkscape:cy="122.11236"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="720"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-91.1829,-604.40257)">
+    <g
+       id="g3028"
+       transform="translate(12.643807,-10.161292)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3009"
+         y="804.505"
+         x="85.092918"
+         style="font-size:119.41140747px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:119.41140747px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Railway;-inkscape-font-specification:Railway"
+           y="804.505"
+           x="85.092918"
+           id="tspan3011"
+           sodipodi:role="line">pygmynote</tspan></text>
+      <g
+         transform="translate(-23.979694,0)"
+         id="g3017">
+        <rect
+           id="rect2989"
+           width="60.297478"
+           height="60.297478"
+           x="177.95328"
+           y="655.06232"
+           style="fill:#ffcc00" />
+        <rect
+           id="rect2989-7"
+           width="60.297478"
+           height="60.297478"
+           x="259.62894"
+           y="655.06232"
+           style="fill:#00ff00" />
+        <rect
+           id="rect2989-2"
+           width="60.297478"
+           height="60.297478"
+           x="218.46953"
+           y="624.72516"
+           style="fill:#de8787" />
+      </g>
+      <text
+         sodipodi:linespacing="125%"
+         id="text2992-1"
+         y="713.89258"
+         x="309.09155"
+         style="font-size:39.96548843px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:39.96548843px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Open Sans;-inkscape-font-specification:Open Sans"
+           y="713.89258"
+           x="309.09155"
+           id="tspan2994-7"
+           sodipodi:role="line">github.com/dmpop/</tspan></text>
+    </g>
+  </g>
+</svg>
