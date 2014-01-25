@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="pygmynote.svg">
+   sodipodi:docname="pygmynote.svg"
+   inkscape:export-filename="/home/dmpop/pygmynote/pygmynote.png"
+   inkscape:export-xdpi="179.93561"
+   inkscape:export-ydpi="179.93561">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -49,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,58 +61,54 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-91.1829,-604.40257)">
+    <text
+       xml:space="preserve"
+       style="font-size:119.41140747px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="97.736725"
+       y="794.34369"
+       id="text3009"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3011"
+         x="97.736725"
+         y="794.34369"
+         style="font-size:119.41140747px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Railway;-inkscape-font-specification:Railway">pygmynote</tspan></text>
     <g
-       id="g3028"
-       transform="translate(12.643807,-10.161292)">
-      <text
-         sodipodi:linespacing="125%"
-         id="text3009"
-         y="804.505"
-         x="85.092918"
-         style="font-size:119.41140747px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-         xml:space="preserve"><tspan
-           style="font-size:119.41140747px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Railway;-inkscape-font-specification:Railway"
-           y="804.505"
-           x="85.092918"
-           id="tspan3011"
-           sodipodi:role="line">pygmynote</tspan></text>
-      <g
-         transform="translate(-23.979694,0)"
-         id="g3017">
-        <rect
-           id="rect2989"
-           width="60.297478"
-           height="60.297478"
-           x="177.95328"
-           y="655.06232"
-           style="fill:#ffcc00" />
-        <rect
-           id="rect2989-7"
-           width="60.297478"
-           height="60.297478"
-           x="259.62894"
-           y="655.06232"
-           style="fill:#00ff00" />
-        <rect
-           id="rect2989-2"
-           width="60.297478"
-           height="60.297478"
-           x="218.46953"
-           y="624.72516"
-           style="fill:#de8787" />
-      </g>
-      <text
-         sodipodi:linespacing="125%"
-         id="text2992-1"
-         y="713.89258"
-         x="309.09155"
-         style="font-size:39.96548843px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-         xml:space="preserve"><tspan
-           style="font-size:39.96548843px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Open Sans;-inkscape-font-specification:Open Sans"
-           y="713.89258"
-           x="309.09155"
-           id="tspan2994-7"
-           sodipodi:role="line">github.com/dmpop/</tspan></text>
+       id="g3017"
+       transform="translate(-11.335887,-10.161292)">
+      <rect
+         style="fill:#ffcc00"
+         y="655.06232"
+         x="177.95328"
+         height="60.297478"
+         width="60.297478"
+         id="rect2989" />
+      <rect
+         style="fill:#00ff00"
+         y="655.06232"
+         x="259.62894"
+         height="60.297478"
+         width="60.297478"
+         id="rect2989-7" />
+      <rect
+         style="fill:#de8787"
+         y="624.72516"
+         x="218.46953"
+         height="60.297478"
+         width="60.297478"
+         id="rect2989-2" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:39.96548843px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="321.73535"
+       y="704.73126"
+       id="text2992-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2994-7"
+         x="321.73535"
+         y="704.73126"
+         style="font-size:39.96548843px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Open Sans;-inkscape-font-specification:Open Sans">github.com/dmpop/</tspan></text>
   </g>
 </svg>
