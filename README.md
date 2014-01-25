@@ -5,11 +5,11 @@ Pygmynote is a command-line tool for storing and managing heterogeneous bit of d
 ##Dependencies
 
 - Python 2.x or 3.x
-- nano text editor
+- nano or any other text editor
 
 ##Installation
 
-Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git` command. Done!
+Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git` command. Done! By default, Pygmynote is configured to use the nano text editor, bu you can change that by changing the *EDITOR* variable in the script.
 
 ##Usage
 
