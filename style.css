@@ -2,7 +2,6 @@
 Basic Tags
  */
 body {
-	background-image: url('background.png');
 	font: 13px/175% 'open Sans', sans-serif;
 	text-align: justify;
 	background-color: #4a525a;
@@ -42,17 +41,8 @@ h2 {
 	letter-spacing: 7px;
 }
 
-p.box {
-	border-style: dashed;
-	width: 489px;
-	border-width: 1px;
-	font-size: 12px;
-	padding: 5px;
-	color: #e3e3e3;
-	margin-bottom: 0px;
-}
-
 p {
+	color: #cfcfcf;
 	width: 500px;
 	text-align: justify;
 }
@@ -69,7 +59,6 @@ img {
 Main Tags
 */
 #content {
-	background-image: url('../images/background.png');
 	position: absolute;
 	top: 10%;
 	left: 50%;

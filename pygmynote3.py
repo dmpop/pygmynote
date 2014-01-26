@@ -131,6 +131,7 @@ ar	Show archived records
 tl	Show tasks
 at	Show records with attachments
 w	Export records as CSV file
+p	Generate an HTML page witt records containing a certain tag
 d	Delete record by its ID
 q	Quit""")
 
@@ -214,8 +215,7 @@ q	Quit""")
 # Search records by tag
 
 			stag = input ('Search by tag: ')
-			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%"
-							 +  stag  +  "%' AND type='1' ORDER BY id ASC")
+			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" + stag + "%' AND type='1' ORDER BY id ASC")
 			print ('\n-----')
 			for row in cursor:
 				print ('\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2]))
@@ -328,6 +328,22 @@ q	Quit""")
 				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
 				file.close()
 			print ('\nRecords have been saved in the pygmynote.txt file.')
+		elif command == 'p':
+
+# Generate pygmynote.html
+
+			stag = escapechar(raw_input('Tag: '))
+			cursor.execute("SELECT note, tags FROM notes WHERE tags LIKE '%" + stag + "%' AND type='1' ORDER BY id ASC")
+			if os.path.exists('pygmynote.html'):
+				os.remove('pygmynote.html')
+			f = 'pygmynote.html'
+			file = open(f, 'a')
+			file.write('<html>\n\t<head>\n\t<meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n\t<link href="style.css" rel="stylesheet" type="text/css" media="all" />\n\t<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">\n\t<title>Pygmynote</title>\n\t</head>\n\t<body>\n\n\t<div id="content">\n\t<p class="content"></p>\n\t<h1>Pygmynote</h1>\n\n\t<table border=0>\n')
+			for row in cursor:
+				file.write('\t<tr><td><hr><p>%s</p></td></tr>\n\t<tr><td><p><small>Tags:<em> %s </small></em></p></td></tr>' % (row[0], row[1]))
+			file.write('\n\t</table>\n\n\t<hr>\n\n\t</body>\n</html>')
+			file.close()
+			print ('\npygmynote.html file has been generated.')
 
 	except:
 		print ('\n\nError: \033[1;31m' + str(sys.exc_info()[0]) + '\033[1;m Please try again.')
