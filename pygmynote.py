@@ -127,7 +127,7 @@ Pygmynote commands:
 ===================
 
 i	Insert new record
-l	Insert long record
+l	Insert new long record
 f	Insert new record with an attachment
 s	Save attachment
 u	Update record
