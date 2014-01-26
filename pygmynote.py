@@ -138,7 +138,7 @@ ar	Show archived records
 tl	Show tasks
 at	Show records with attachments
 w	Export records as CSV file
-p	Generate an HTML page witt records containing a certain tag
+p	Generate HTML page with records containing a certain tag
 d	Delete record by its ID
 q	Quit"""
 
