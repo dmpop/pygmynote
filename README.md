@@ -9,7 +9,7 @@ Pygmynote is a command-line tool for storing and managing heterogeneous bit of d
 
 ##Installation
 
-Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git` command. Alternatively, download the provided *zip* or *tar* archive. By default, Pygmynote is configured to use the nano text editor, but you can change that by changing the *EDITOR* variable in the script.
+Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git` command. Alternatively, download the provided *zip* or *tar* archive. By default, Pygmynote is configured to use the nano text editor, but you can change that by changing the *EDITOR* variable in the script. To specify a different backup directory, edit the *BACKUP* variable.
 
 ##Usage
 

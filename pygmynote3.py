@@ -34,9 +34,11 @@ import gettext
 import sqlite3 as sqlite
 import tempfile
 import subprocess
+import shutil
 
 EDITOR = 'nano'
 DB = 'pygmynote.sqlite'
+BACKUP = 'pygmynotebackup/' # Note the trailing slash
 
 ENC = "utf-8"
 DEBUG = False
@@ -314,7 +316,15 @@ q	Quit""")
 			recid = input('Delete note ID: ')
 			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
 			print ('\nRecord has been deleted.')
-			conn.commit()
+			conn.commit()		elif command == 'b':
+
+# Backup database
+
+			if not os.path.exists(BACKUP):
+				os.makedirs(BACKUP)
+			shutil.copy('pygmynote.sqlite', BACKUP)
+			os.rename(BACKUP + 'pygmynote.sqlite', BACKUP + today + '-pygmynote.sql')
+			print ('\nBackup copy of the database has been been saved in ' + BACKUP)
 		elif command == 'e':
 
 # Save all records in pygmynote.txt

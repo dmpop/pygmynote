@@ -33,9 +33,11 @@ import calendar
 import gettext
 import tempfile
 import subprocess
+import shutil
 
 EDITOR = 'nano'
 DB = 'pygmynote.sqlite'
+BACKUP = 'pygmynotebackup/' # Note the trailing slash
 
 ENC = 'utf-8'
 DEBUG = False
@@ -140,6 +142,7 @@ at	Show records with attachments
 e	Export records as CSV file
 g	Generate HTML page with records containing a certain tag
 d	Delete record by its ID
+b Backup the database
 q	Quit"""
 
 		elif command == 'i':
@@ -322,6 +325,15 @@ q	Quit"""
 			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
 			print '\nRecord has been deleted.'
 			conn.commit()
+		elif command == 'b':
+
+# Backup database
+
+			if not os.path.exists(BACKUP):
+				os.makedirs(BACKUP)
+			shutil.copy('pygmynote.sqlite', BACKUP)
+			os.rename(BACKUP + 'pygmynote.sqlite', BACKUP + today + '-pygmynote.sql')
+			print '\nBackup copy of the database has been been saved in ' + BACKUP
 		elif command == 'e':
 
 # Save all records in pygmynote.txt
