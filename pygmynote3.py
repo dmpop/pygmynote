@@ -130,8 +130,8 @@ a	Show active records
 ar	Show archived records
 tl	Show tasks
 at	Show records with attachments
-w	Export records as CSV file
-p	Generate HTML page with records containing a certain tag
+e	Export records as CSV file
+g	Generate HTML page with records containing a certain tag
 d	Delete record by its ID
 q	Quit""")
 
@@ -315,7 +315,7 @@ q	Quit""")
 			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
 			print ('\nRecord has been deleted.')
 			conn.commit()
-		elif command == 'w':
+		elif command == 'e':
 
 # Save all records in pygmynote.txt
 
@@ -328,7 +328,7 @@ q	Quit""")
 				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
 				file.close()
 			print ('\nRecords have been saved in the pygmynote.txt file.')
-		elif command == 'p':
+		elif command == 'g':
 
 # Generate pygmynote.html
 
