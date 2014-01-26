@@ -13,7 +13,7 @@ Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git
 
 ##Usage
 
-Open terminal, switch to the *pygmynote* directory and run the _pygmynote.py_ script in the terminal. Type **help** and press `Enter` to list the available commands.
+Open terminal, switch to the *pygmynote* directory and run the _pygmynote.py_ script in the terminal. Type *help* and press `Enter` to list the available commands.
 
 ##License
 
