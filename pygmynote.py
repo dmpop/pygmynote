@@ -8,11 +8,12 @@ Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 
 i18:
 ~~~~
-xgettext --language=Python --keyword=_ --output=pygmynote.po pygmynote.py
+cd pygmynote
+xgettext --language=Python --keyword=_ --output=pygmynote.pot pygmynote.py
+mkdir -p locales/xx_XX/LC_MESSAGES
+cp pygmynote.pot locales/xx_XX/LC_MESSAGES/pygmynote.po
+cd locales/xx_XX/LC_MESSAGES
 msgfmt pygmynote.po -o pygmynote.mo
-mkdir -p xx_XX/LC_MESSAGES
-mv pygmynote.mo xx_XX/LC_MESSAGES/pygmynote.mo
-mv pygmynote.po xx_XX/LC_MESSAGES/pygmynote.po
 
 test_i18:
 ~~~~~~~~~
@@ -44,7 +45,7 @@ DEBUG = False
 DOMAIN = 'pygmynote'
 
 try:
-	TRANSLATION = gettext.translation(DOMAIN, '.')
+	TRANSLATION = gettext.translation(DOMAIN, './locales')
 	_ = TRANSLATION.ugettext
 except IOError:
 	_ = gettext.gettext
