@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-27 13:37+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pygmynote.py:55
+#, python-format
+msgid "Use sqlite3, with python %s"
+msgstr ""
+
+#: pygmynote.py:59
+#, python-format
+msgid "Use pysqlite2, with python %s"
+msgstr ""
+
+#: pygmynote.py:63
+msgid "The database already exists."
+msgstr ""
+
+#: pygmynote.py:67
+msgid "Creating a new database."
+msgstr ""
+
+#: pygmynote.py:77
+msgid "Connection to the SQLite database failed!"
+msgstr ""
+
+#: pygmynote.py:83
+msgid ""
+"\033[1;32m\n"
+"           ( 0)>\n"
+"          (( *))\n"
+"            ||\n"
+"===========\"==\"=============\n"
+"Pygmynote is ready. Pile up!\n"
+"============================\033[1;m\n"
+"\n"
+"\033[1;36mType \"h\" and press ENTER\033[1;m"
+msgstr ""
+
+#: pygmynote.py:111
+msgid ""
+"\n"
+"------------------\n"
+"Today's deadlines:\n"
+"------------------"
+msgstr ""
+
+#: pygmynote.py:126
+msgid ""
+"\n"
+"===================\n"
+"Pygmynote commands:\n"
+"===================\n"
+"\n"
+"i\tInsert new record\n"
+"l\tInsert new long record\n"
+"f\tInsert new record with an attachment\n"
+"s\tSave attachment\n"
+"u\tUpdate record\n"
+"n\tSearch records by note\n"
+"t\tSearch records by tag\n"
+"a\tShow active records\n"
+"ar\tShow archived records\n"
+"tl\tShow tasks\n"
+"at\tShow records with attachments\n"
+"e\tExport records as CSV file\n"
+"g\tGenerate HTML page with records containing a certain tag\n"
+"d\tDelete record by its ID\n"
+"b Backup the database\n"
+"q\tQuit"
+msgstr ""
+
+#: pygmynote.py:152 pygmynote.py:185
+msgid "Note: "
+msgstr ""
+
+#: pygmynote.py:153 pygmynote.py:186 pygmynote.py:280
+msgid "Tags: "
+msgstr ""
+
+#: pygmynote.py:154 pygmynote.py:173
+msgid "Due date (yyyy-mm-dd). Press ENTER to skip: "
+msgstr ""
+
+#: pygmynote.py:161 pygmynote.py:180 pygmynote.py:194
+msgid ""
+"\n"
+"Record has been added."
+msgstr ""
+
+#: pygmynote.py:187
+msgid "Enter path to file (e.g., /home/user/foo.png): "
+msgstr ""
+
+#: pygmynote.py:199 pygmynote.py:264
+msgid "Record id: "
+msgstr ""
+
+#: pygmynote.py:200
+msgid "Specify full path and file name (e.g., /home/user/foo.png): "
+msgstr ""
+
+#: pygmynote.py:208
+msgid ""
+"\n"
+"File has been saved."
+msgstr ""
+
+#: pygmynote.py:213
+msgid "Search notes for: "
+msgstr ""
+
+#: pygmynote.py:221 pygmynote.py:234 pygmynote.py:246 pygmynote.py:258
+#: pygmynote.py:306 pygmynote.py:318
+#, python-format
+msgid "\033[1;34mRecord count:\033[1;m %s"
+msgstr ""
+
+#: pygmynote.py:227
+msgid "Search by tag: "
+msgstr ""
+
+#: pygmynote.py:265
+msgid "Update note [0], tags [1], due date [2], or archive [3]: "
+msgstr ""
+
+#: pygmynote.py:285
+msgid "Due date: "
+msgstr ""
+
+#: pygmynote.py:293
+msgid ""
+"\n"
+"Record has been updated."
+msgstr ""
+
+#: pygmynote.py:326
+msgid ""
+"\n"
+"Record has been deleted."
+msgstr ""
+
+#: pygmynote.py:336
+msgid ""
+"\n"
+"Backup copy of the database has been been saved in "
+msgstr ""
+
+#: pygmynote.py:349
+msgid ""
+"\n"
+"Records have been saved in the pygmynote.txt file."
+msgstr ""
+
+#: pygmynote.py:354
+msgid "Tag: "
+msgstr ""
+
+#: pygmynote.py:365
+msgid ""
+"\n"
+"pygmynote.html file has been generated."
+msgstr ""
+
+#: pygmynote.py:368
+msgid ""
+"\n"
+"\n"
+"Error: \033[1;31m"
+msgstr ""
+
+#: pygmynote.py:372
+msgid ""
+"\033[1;33m\n"
+"         ( 0)>\n"
+"        (( *))\n"
+"          ||\n"
+"========\"==\"=========\n"
+"Bye! Have a nice day.\n"
+"=====================\033[1;m\n"
+msgstr ""
