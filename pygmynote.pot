@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 13:37+0100\n"
+"POT-Creation-Date: 2014-01-27 16:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pygmynote.py:55
+#: pygmynote.py:75
 #, python-format
 msgid "Use sqlite3, with python %s"
 msgstr ""
 
-#: pygmynote.py:59
+#: pygmynote.py:79
 #, python-format
 msgid "Use pysqlite2, with python %s"
 msgstr ""
 
-#: pygmynote.py:63
+#: pygmynote.py:83
 msgid "The database already exists."
 msgstr ""
 
-#: pygmynote.py:67
+#: pygmynote.py:87
 msgid "Creating a new database."
 msgstr ""
 
-#: pygmynote.py:77
+#: pygmynote.py:97
 msgid "Connection to the SQLite database failed!"
 msgstr ""
 
-#: pygmynote.py:83
+#: pygmynote.py:103
 msgid ""
-"\033[1;32m\n"
+"\n"
 "           ( 0)>\n"
 "          (( *))\n"
 "            ||\n"
 "===========\"==\"=============\n"
 "Pygmynote is ready. Pile up!\n"
-"============================\033[1;m\n"
-"\n"
-"\033[1;36mType \"h\" and press ENTER\033[1;m"
+"============================"
 msgstr ""
 
 #: pygmynote.py:111
+msgid ""
+"\n"
+"Type \"h\" and press ENTER"
+msgstr ""
+
+#: pygmynote.py:132
 msgid ""
 "\n"
 "------------------\n"
@@ -60,7 +64,7 @@ msgid ""
 "------------------"
 msgstr ""
 
-#: pygmynote.py:126
+#: pygmynote.py:147
 msgid ""
 "\n"
 "===================\n"
@@ -85,112 +89,115 @@ msgid ""
 "q\tQuit"
 msgstr ""
 
-#: pygmynote.py:152 pygmynote.py:185
+#: pygmynote.py:173 pygmynote.py:207
 msgid "Note: "
 msgstr ""
 
-#: pygmynote.py:153 pygmynote.py:186 pygmynote.py:280
+#: pygmynote.py:174 pygmynote.py:208 pygmynote.py:302
 msgid "Tags: "
 msgstr ""
 
-#: pygmynote.py:154 pygmynote.py:173
+#: pygmynote.py:175 pygmynote.py:195
 msgid "Due date (yyyy-mm-dd). Press ENTER to skip: "
 msgstr ""
 
-#: pygmynote.py:161 pygmynote.py:180 pygmynote.py:194
+#: pygmynote.py:182 pygmynote.py:202 pygmynote.py:216
 msgid ""
 "\n"
 "Record has been added."
 msgstr ""
 
-#: pygmynote.py:187
+#: pygmynote.py:209
 msgid "Enter path to file (e.g., /home/user/foo.png): "
 msgstr ""
 
-#: pygmynote.py:199 pygmynote.py:264
+#: pygmynote.py:221 pygmynote.py:286
 msgid "Record id: "
 msgstr ""
 
-#: pygmynote.py:200
+#: pygmynote.py:222
 msgid "Specify full path and file name (e.g., /home/user/foo.png): "
 msgstr ""
 
-#: pygmynote.py:208
+#: pygmynote.py:230
 msgid ""
 "\n"
 "File has been saved."
 msgstr ""
 
-#: pygmynote.py:213
+#: pygmynote.py:235
 msgid "Search notes for: "
 msgstr ""
 
-#: pygmynote.py:221 pygmynote.py:234 pygmynote.py:246 pygmynote.py:258
-#: pygmynote.py:306 pygmynote.py:318
-#, python-format
-msgid "\033[1;34mRecord count:\033[1;m %s"
+#: pygmynote.py:243 pygmynote.py:256 pygmynote.py:268 pygmynote.py:280
+#: pygmynote.py:328 pygmynote.py:340
+msgid "Record count: "
 msgstr ""
 
-#: pygmynote.py:227
+#: pygmynote.py:249
 msgid "Search by tag: "
 msgstr ""
 
-#: pygmynote.py:265
+#: pygmynote.py:287
 msgid "Update note [0], tags [1], due date [2], or archive [3]: "
 msgstr ""
 
-#: pygmynote.py:285
+#: pygmynote.py:307
 msgid "Due date: "
 msgstr ""
 
-#: pygmynote.py:293
+#: pygmynote.py:315
 msgid ""
 "\n"
 "Record has been updated."
 msgstr ""
 
-#: pygmynote.py:326
+#: pygmynote.py:348
 msgid ""
 "\n"
 "Record has been deleted."
 msgstr ""
 
-#: pygmynote.py:336
+#: pygmynote.py:358
 msgid ""
 "\n"
 "Backup copy of the database has been been saved in "
 msgstr ""
 
-#: pygmynote.py:349
+#: pygmynote.py:371
 msgid ""
 "\n"
 "Records have been saved in the pygmynote.txt file."
 msgstr ""
 
-#: pygmynote.py:354
+#: pygmynote.py:376
 msgid "Tag: "
 msgstr ""
 
-#: pygmynote.py:365
+#: pygmynote.py:387
 msgid ""
 "\n"
 "pygmynote.html file has been generated."
 msgstr ""
 
-#: pygmynote.py:368
+#: pygmynote.py:390
 msgid ""
 "\n"
 "\n"
-"Error: \033[1;31m"
+"Error: "
 msgstr ""
 
-#: pygmynote.py:372
+#: pygmynote.py:390
+msgid " Please try again."
+msgstr ""
+
+#: pygmynote.py:394
 msgid ""
-"\033[1;33m\n"
+"\n"
 "         ( 0)>\n"
 "        (( *))\n"
 "          ||\n"
 "========\"==\"=========\n"
 "Bye! Have a nice day.\n"
-"=====================\033[1;m\n"
+"=====================\n"
 msgstr ""

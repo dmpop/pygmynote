@@ -45,6 +45,24 @@ ENC = "utf-8"
 DEBUG = False
 DOMAIN = "pygmynote"
 
+# Terminal colors
+
+class termcolor:
+	GREEN = '\033[1;32m'
+	BLUE = '\033[1;34m'
+	GRAY = '\033[1;30m'
+	YELLOW = '\033[1;33m'
+	RED = '\033[1;31m'
+	END = '\033[1;m'
+
+	def disable(self):
+		self.GREEN = ''
+		self.BLUE = ''
+		self.GRAY = ''
+		self.YELLOW = ''
+		self.RED = ''
+		self.END = ''
+
 try:
 	TRANSLATION = gettext.translation(DOMAIN, "./locales")
 	_ = TRANSLATION.ugettext
@@ -74,14 +92,15 @@ today = time.strftime("%Y-%m-%d")
 command = ""
 counter = 0
 
-print (_("""\033[1;32m
+print termcolor.GREEN + (_("""
            ( 0)>
           (( *))
             ||
 ==========="=="=============
 Pygmynote is ready. Pile up!
-============================\033[1;m\n
-\033[1;36mType \"h\" and press ENTER\033[1;m"""))
+============================""")) + termcolor.END
+
+print termcolor.BLUE + (_("""\nType \"h\" and press ENTER""")) + termcolor.END
 
 def escapechar(sel):
 	sel=sel.replace("\'", "\''")
@@ -108,7 +127,7 @@ Today\'s deadlines:
 ------------------"""))
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
-	print ("\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2], row[3]))
+	print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + row[2] + termcolor.GRAY + ' [' + row[3] + ']' + termcolor.END
 
 while command != "q":
 
@@ -117,7 +136,7 @@ while command != "q":
 		command = input('\n>')
 
 		if command == 'h':
-			print (_("""
+			print termcolor.GREEN + (_("""
 ===================
 Pygmynote commands:
 ===================
@@ -136,7 +155,7 @@ at	Show records with attachments
 e	Export records as CSV file
 g	Generate HTML page with records containing a certain tag
 d	Delete record by its ID
-q	Quit"""))
+q	Quit""")) + termcolor.END
 
 		elif command == "i":
 
@@ -151,11 +170,12 @@ q	Quit"""))
 				% (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
-			print (_('\nRecord has been added.'))
+			print termcolor.GREEN + (_('\nRecord has been added.')) + termoclor.END
 		elif command == 'l':
 		
 		# Insert long record
 			# http://stackoverflow.com/questions/3076798/start-nano-as-a-subprocess-from-python-capture-input
+
 			f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 			n = f.name
 			f.close()
@@ -170,7 +190,7 @@ q	Quit"""))
 				% (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
-			print (_('\nRecord has been added.'))
+			print (termcolor.GREEN + _('\nRecord has been added.') + termcolor.END)
 		elif command == 'f':
 
 # Insert new record with file
@@ -184,7 +204,7 @@ q	Quit"""))
 			f.close()
 			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
-			print (_('\nRecord has been added.'))
+			print (termcolor.GREEN + _('\nRecord has been added.')) + termoclor.END)
 		elif command == 's':
 
 # Save file
@@ -198,7 +218,7 @@ q	Quit"""))
 			f.close()
 			cursor.close()
 			conn.commit()
-			print (_('\nFile has been saved.'))
+			print (termcolor.GREEN + _('\nFile has been saved.') +termcolor.END)
 		elif command == 'n':
 
 # Search records by note
@@ -208,10 +228,10 @@ q	Quit"""))
 							 +  rtxt  +  "%'ORDER BY id ASC")
 			print ("\n-----")
 			for row in cursor:
-				print ("\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2]))
+				print (termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END)
 				counter = counter + 1
 			print ("\n-----")
-			print (_("\033[1;34mRecord count:\033[1;m %s")) % counter
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 't':
 
@@ -221,10 +241,10 @@ q	Quit"""))
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" + stag + "%' AND type='1' ORDER BY id ASC")
 			print ('\n-----')
 			for row in cursor:
-				print ('\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2]))
+				print (termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END)
 				counter = counter + 1
 			print ('\n-----')
-			print (_('\033[1;34mRecord count:\033[1;m %s') % counter)
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 'a':
 
@@ -233,10 +253,10 @@ q	Quit"""))
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
 			print ("\n-----")
 			for row in cursor:
-				print ("\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2]))
+				print (termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END)
 				counter = counter + 1
 			print ('\n-----')
-			print (_('\033[1;34mRecord count:\033[1;m %s') % counter)
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 'ar':
 
@@ -245,10 +265,10 @@ q	Quit"""))
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
 			print ('\n-----')
 			for row in cursor:
-				print ('\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m' % (row[0], row[1], row[2]))
+				print (termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END)
 				counter = counter + 1
 			print ('\n-----')
-			print (_('\033[1;34mRecord count:\033[1;m %s') % counter)
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 'u':
 
@@ -283,7 +303,7 @@ q	Quit"""))
 				cursor.execute("UPDATE notes SET type='"  +  rtype
 								 +  "' WHERE id='"  +  recid  +  "'")
 			conn.commit()
-			print (_('\nRecord has been updated.'))
+			print (termcolor.GREEN + _('\nRecord has been updated.') + termcolor.END)
 		elif command == 'tl':
 
 # Show tasks
@@ -293,10 +313,10 @@ q	Quit"""))
 			now = datetime.datetime.now()
 			calendar.prmonth(now.year, now.month)
 			for row in cursor:
-				print ("\n%s -- \033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m" % (row[0], row[1], row[2], row[3]))
+				print ('\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + row[2] + termcolor.GRAY + ' [' + row[3] + ']' + termcolor.END)
 				counter = counter + 1
 			print ('\n-----')
-			print ('\033[1;34mRecord count:\033[1;m %s' % counter)
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 'at':
 
@@ -305,10 +325,10 @@ q	Quit"""))
 			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
 			print ('\n-----')
 			for row in cursor:
-				print ('\n\033[1;32m%s\033[1;m %s \033[1;30m[%s]\033[1;m \033[1;43m%s\033[1;m' % (row[0], row[1], row[2], row[3]))
+				print (termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + '] ' + termcolor.END + termcolor.HIGHLIGHT + str(row[3]) + termcolor.END)
 				counter = counter + 1
 			print ('\n-----')
-			print (_('\033[1;34mRecord count:\033[1;m %s') % counter)
+			print (termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter))
 			counter = 0
 		elif command == 'd':
 
@@ -316,7 +336,7 @@ q	Quit"""))
 
 			recid = input(_('Delete note ID: '))
 			cursor.execute("DELETE FROM notes WHERE ID='"  +  recid  +  "'")
-			print ('\nRecord has been deleted.')
+			print (termcolor.GREEN + _('\nRecord has been deleted.') + termcolor.END)
 			conn.commit()		elif command == 'b':
 
 # Backup database
@@ -325,7 +345,7 @@ q	Quit"""))
 				os.makedirs(BACKUP)
 			shutil.copy('pygmynote.sqlite', BACKUP)
 			os.rename(BACKUP + 'pygmynote.sqlite', BACKUP + today + '-pygmynote.sql')
-			print (_('\nBackup copy of the database has been been saved in ') + BACKUP)
+			print (termcolor.GREEN + _('\nBackup copy of the database has been been saved in ') + BACKUP + termcolor.END)
 		elif command == 'e':
 
 # Save all records in pygmynote.txt
@@ -338,7 +358,7 @@ q	Quit"""))
 				file = open(filename, 'a')
 				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
 				file.close()
-			print (_('\nRecords have been saved in the pygmynote.txt file.'))
+			print (termcolor.GREEN + _('\nRecords have been saved in the pygmynote.txt file.') + termcolor.END)
 		elif command == 'g':
 
 # Generate pygmynote.html
@@ -354,20 +374,20 @@ q	Quit"""))
 				file.write('\t<tr><td><hr><p>%s</p></td></tr>\n\t<tr><td><p><small>Tags:<em> %s </small></em></p></td></tr>' % (row[0], row[1]))
 			file.write('\n\t</table>\n\n\t<hr>\n\t<center><div class="footer">Generated by <a href="https://github.com/dmpop/pygmynote">Pygmynote</a></div></center>\n\n\t</body>\n</html>')
 			file.close()
-			print (_('\npygmynote.html file has been generated.'))
+			print termcolor.GREEN + (_('\npygmynote.html file has been generated.')) + termcolor.END
 
 	except:
-		print (_('\n\nError: \033[1;31m' + str(sys.exc_info()[0]) + '\033[1;m Please try again.'))
+		print (_('\n\nError: ') + termcolor.RED + str(sys.exc_info()[0]) + termcolor.END + _(' Please try again.'))
 
 		continue
 
-print (_("""\033[1;33m
+print (termcolor.YELLOW + _("""
          ( 0)>
         (( *))
           ||
 ========"=="=========
 Bye! Have a nice day.
-=====================\033[1;m\n"""))
+=====================\n""") + termcolor.END)
 
 cursor.close()
 conn.close()
