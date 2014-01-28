@@ -10,9 +10,9 @@ i18:
 ~~~~
 cd pygmynote
 xgettext --language=Python --keyword=_ --output=pygmynote.pot pygmynote.py
-mkdir -p locales/xx_XX/LC_MESSAGES
-cp pygmynote.pot locales/xx_XX/LC_MESSAGES/pygmynote.po
-cd locales/xx_XX/LC_MESSAGES
+mkdir -p locale/xx/LC_MESSAGES
+cp pygmynote.pot locale/xx/LC_MESSAGES/pygmynote.po
+cd locale/xx/LC_MESSAGES
 msgfmt pygmynote.po -o pygmynote.mo
 
 test_i18:
@@ -64,7 +64,7 @@ class termcolor:
 		self.END = ''
 
 try:
-	TRANSLATION = gettext.translation(DOMAIN, './locales')
+	TRANSLATION = gettext.translation(DOMAIN, './locale')
 	_ = TRANSLATION.ugettext
 except IOError:
 	_ = gettext.gettext
