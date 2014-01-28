@@ -174,14 +174,12 @@ q	Quit""") + termcolor.END
 			rtags = escapechar(raw_input(_('Tags: ')))
 			rdue = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
 			rtype = "1"
-			sqlquery = \
-				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
-				% (rtxt, rdue, rtags, rtype)
+			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been added.') + termoclor.END
 		elif command == 'l':
-		
+
 		# Insert long record
 			# http://stackoverflow.com/questions/3076798/start-nano-as-a-subprocess-from-python-capture-input
 
@@ -194,9 +192,7 @@ q	Quit""") + termcolor.END
 			rtags = escapechar(raw_input('Tags: '))
 			rdue = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
 			rtype = "1"
-			sqlquery = \
-				"INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')"\
-				% (rtxt, rdue, rtags, rtype)
+			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
