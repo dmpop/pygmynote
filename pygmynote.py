@@ -40,7 +40,7 @@ EDITOR = 'nano'
 DB = 'pygmynote.sqlite'
 BACKUP = 'pygmynotebackup/' # Note the trailing slash
 
-ENC = 'utf-8'
+ENC = 'UTF-8'
 DEBUG = False
 DOMAIN = 'pygmynote'
 
@@ -135,7 +135,7 @@ Today\'s deadlines:
 ------------------""")
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
-	print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + row[2] + termcolor.GRAY + ' [' + row[3] + ']' + termcolor.END
+	print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + unicode(row[2]) + termcolor.GRAY + ' [' + unicode(row[3]) + ']' + termcolor.END
 
 while command != 'q':
 
@@ -177,7 +177,7 @@ q	Quit""") + termcolor.END
 			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
-			print termcolor.GREEN + _('\nRecord has been added.') + termoclor.END
+			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
 		elif command == 'l':
 
 		# Insert long record
@@ -233,7 +233,7 @@ q	Quit""") + termcolor.END
 							 +  rtxt  +  "%'ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
-				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -246,7 +246,7 @@ q	Quit""") + termcolor.END
 			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" +  stag + "%' AND type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
-				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -258,7 +258,7 @@ q	Quit""") + termcolor.END
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
-				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -270,7 +270,7 @@ q	Quit""") + termcolor.END
 			cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
-				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + ']' + termcolor.END
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -286,7 +286,7 @@ q	Quit""") + termcolor.END
 				row = cursor.fetchone()
 				f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 				n = f.name
-				f.write('%s' % row[1])
+				f.write(row[1].encode(ENC))
 				f.close()
 				subprocess.call([EDITOR, n])
 				with open(n) as f:
@@ -318,7 +318,7 @@ q	Quit""") + termcolor.END
 			now = datetime.datetime.now()
 			calendar.prmonth(now.year, now.month)
 			for row in cursor:
-				print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + row[2] + termcolor.GRAY + ' [' + row[3] + ']' + termcolor.END
+				print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + unicode(row[2]) + termcolor.GRAY + ' [' + unicode(row[3]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -330,7 +330,7 @@ q	Quit""") + termcolor.END
 			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
-				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + str(row[1]) + termcolor.GRAY + ' [' + str(row[2]) + '] ' + termcolor.END + termcolor.HIGHLIGHT + str(row[3]) + termcolor.END
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + '] ' + termcolor.END + termcolor.HIGHLIGHT + str(row[3]) + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
@@ -360,8 +360,8 @@ q	Quit""") + termcolor.END
 			if os.path.exists('pygmynote.txt'):
 				os.remove('pygmynote.txt')
 			for row in cursor:
-				fname = 'pygmynote.txt'
-				file = open(fname, 'a')
+				f = 'pygmynote.txt'
+				file = codecs.open(f, 'a', encoding=ENC)
 				file.write('%s\t%s\t[%s]\t%s\n' % (row[0], row[1], row[2], row[3]))
 				file.close()
 			print termcolor.GREEN + _('\nRecords have been saved in the pygmynote.txt file.') + termcolor.END
@@ -374,7 +374,7 @@ q	Quit""") + termcolor.END
 			if os.path.exists('pygmynote.html'):
 				os.remove('pygmynote.html')
 			f = 'pygmynote.html'
-			file = open(f, 'a')
+			file = codecs.open(f, 'a', encoding=ENC)
 			file.write('<html>\n\t<head>\n\t<meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n\t<link href="style.css" rel="stylesheet" type="text/css" media="all" />\n\t<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">\n\t<title>Pygmynote</title>\n\t</head>\n\t<body>\n\n\t<div id="content">\n\t<p class="content"></p>\n\t<h1>Pygmynote</h1>\n\n\t<table border=0>\n')
 			for row in cursor:
 				file.write('\t<tr><td><hr><p>%s</p></td></tr>\n\t<tr><td><p><small>Tags:<em> %s </small></em></p></td></tr>' % (row[0], row[1]))
