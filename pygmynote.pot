@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 00:48+0100\n"
+"POT-Creation-Date: 2014-01-30 00:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,10 +154,16 @@ msgid ""
 "Record has been updated."
 msgstr ""
 
-#: pygmynote.py:329 pygmynote.py:337
+#: pygmynote.py:329
 msgid ""
 "\n"
 "Record has been pinned."
+msgstr ""
+
+#: pygmynote.py:337
+msgid ""
+"\n"
+"Record has been unpinned."
 msgstr ""
 
 #: pygmynote.py:370

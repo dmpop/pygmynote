@@ -334,7 +334,7 @@ q	Quit""") + termcolor.END
 			recid = raw_input(_('Record id: '))
 			cursor.execute("UPDATE notes SET type='1' WHERE id='"  +  recid  + "'")
 			conn.commit()
-			print termcolor.GREEN + _('\nRecord has been pinned.') +termcolor.END
+			print termcolor.GREEN + _('\nRecord has been unpinned.') +termcolor.END
 		elif command == 'tl':
 
 # Show tasks
