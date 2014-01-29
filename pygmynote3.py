@@ -36,6 +36,7 @@ import sqlite3 as sqlite
 import tempfile
 import subprocess
 import shutil
+import codecs
 
 EDITOR = 'nano'
 DB = 'pygmynote.sqlite'
