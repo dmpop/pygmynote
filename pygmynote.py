@@ -389,9 +389,9 @@ q	Quit""") + termcolor.END
 		continue
 
 print termcolor.YELLOW + _("""
-         ( 0)>
-        (( *))
-          ||
+        ( 0)>
+       (( *))
+         ||
 ========"=="=========
 Bye! Have a nice day.
 =====================\n""") + termcolor.END
