@@ -128,16 +128,21 @@ if CREATE == True:
 		note VARCHAR(1024),\
 		file BLOB,\
 		due DATE,\
-		type VARCHAR(3),\
+		type VARCHAR(1),\
 		ext VARCHAR(3),\
 		tags VARCHAR(256));"
 	cursor.execute(CREATE_SQL)
 	conn.commit()
 
 print _("""
-------------------
-Today\'s deadlines:
-------------------""")
+-------------------------------------
+Pinned records and today's deadlines:
+-------------------------------------""")
+
+cursor.execute ("SELECT id, note, tags FROM notes WHERE type = '3' ORDER BY id ASC")
+for row in cursor:
+	print '\n' + termcolor.GREEN + str(row[0]) + termcolor.END + ' -- ' + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
+
 cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
 	print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + unicode(row[2]) + termcolor.GRAY + ' [' + unicode(row[3]) + ']' + termcolor.END
@@ -154,11 +159,13 @@ while command != 'q':
 Pygmynote commands:
 ===================
 
-i	Insert new record
-l	Insert new long record
-f	Insert new record with an attachment
-s	Save attachment
-u	Update record
+i	Insert a new record
+l	Insert a new long record
+f	Insert a new record with an attachment
+s	Save an attachment
+u	Update a record
+p	Pin a record
+x	Unpin a record
 n	Search records by note
 t	Search records by tag
 a	Show active records
@@ -167,13 +174,13 @@ tl	Show tasks
 at	Show records with attachments
 e	Export records as CSV file
 g	Generate HTML page with records containing a certain tag
-d	Delete record by its ID
+d	Delete a record by its ID
 b Backup the database
 q	Quit""") + termcolor.END
 
 		elif command == 'i':
 
-# Insert new record
+# Insert a new record
 
 			rtxt = escapechar(raw_input(_('Note: ')))
 			rtags = escapechar(raw_input(_('Tags: ')))
@@ -185,8 +192,8 @@ q	Quit""") + termcolor.END
 			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
 		elif command == 'l':
 
-		# Insert long record
-			# http://stackoverflow.com/questions/3076798/start-nano-as-a-subprocess-from-python-capture-input
+# Insert a new long record
+# http://stackoverflow.com/questions/3076798/start-nano-as-a-subprocess-from-python-capture-input
 
 			f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 			n = f.name
@@ -203,7 +210,7 @@ q	Quit""") + termcolor.END
 			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
 		elif command == 'f':
 
-# Insert new record with file
+# Insert a new record with file
 
 			rtxt = escapechar(raw_input(_('Note: ')))
 			rtags = escapechar(raw_input(_('Tags: ')))
@@ -217,7 +224,7 @@ q	Quit""") + termcolor.END
 			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
 		elif command == 's':
 
-# Save file
+# Save attachment
 
 			recid = raw_input(_('Record id: '))
 			outfile=raw_input(_('Specify full path and file name (e.g., /home/user/foo.png): '))
@@ -282,7 +289,7 @@ q	Quit""") + termcolor.END
 			counter = 0
 		elif command == 'u':
 
-# Update record
+# Update a record
 
 			recid = raw_input(_('Record id: '))
 			rtype = raw_input(_('Update note [0], tags [1], due date [2], or archive [3]: '))
@@ -309,11 +316,25 @@ q	Quit""") + termcolor.END
 				cursor.execute("UPDATE notes SET due='"  +  dueupd
 								 +  "' WHERE id='"  +  recid  +  "'")
 			else:
-				rtype = '0'
-				cursor.execute("UPDATE notes SET type='"  +  rtype
-								 +  "' WHERE id='"  +  recid  +  "'")
+				cursor.execute("UPDATE notes SET type='0' WHERE id='"  +  recid  + "'")
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been updated.') +termcolor.END
+		elif command == 'p':
+
+# Pin a record
+
+			recid = raw_input(_('Record id: '))
+			cursor.execute("UPDATE notes SET type='3' WHERE id='"  +  recid  + "'")
+			conn.commit()
+			print termcolor.GREEN + _('\nRecord has been pinned.') +termcolor.END
+		elif command == 'x':
+
+# Unpin a record
+
+			recid = raw_input(_('Record id: '))
+			cursor.execute("UPDATE notes SET type='1' WHERE id='"  +  recid  + "'")
+			conn.commit()
+			print termcolor.GREEN + _('\nRecord has been pinned.') +termcolor.END
 		elif command == 'tl':
 
 # Show tasks
@@ -342,7 +363,7 @@ q	Quit""") + termcolor.END
 			counter = 0
 		elif command == 'd':
 
-# Delete record by its ID
+# Delete a record by its ID
 
 			recid = raw_input('Delete note ID: ')
 			cursor.execute("DELETE FROM notes WHERE ID='" + recid + "'")
@@ -350,7 +371,7 @@ q	Quit""") + termcolor.END
 			conn.commit()
 		elif command == 'b':
 
-# Backup database
+# Backup the database
 
 			if not os.path.exists(BACKUP):
 				os.makedirs(BACKUP)
@@ -359,7 +380,7 @@ q	Quit""") + termcolor.END
 			print termcolor.GREEN + _('\nBackup copy of the database has been been saved in ') + BACKUP + termcolor.END
 		elif command == 'e':
 
-# Save all records in pygmynote.txt
+# Export records
 
 			cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
 			if os.path.exists(EXPORT_FILE):
@@ -372,7 +393,7 @@ q	Quit""") + termcolor.END
 			print termcolor.GREEN + _('\nRecords have been saved in the ') + EXPORT_FILE + _(' file.') + termcolor.END
 		elif command == 'g':
 
-# Generate pygmynote.html
+# Generate an HTML file
 
 			stag = escapechar(raw_input(_('Tag: ')))
 			cursor.execute("SELECT note, tags FROM notes WHERE tags LIKE '%" + stag + "%' AND type='1' ORDER BY id ASC")
