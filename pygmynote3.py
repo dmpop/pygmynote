@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Pygmynote is a command-line tool for storing and managing heterogeneous bit of data like notes, tasks, links, file attachments, etc. Pygmynote is written in Python and uses a SQLite database as its back end.
+Pygmynote is a command-line tool for storing and managing heterogeneous bit of data like notes, tasks, links, file attachments, etc. Pygmynote is written in Python and uses an SQLite database as its back end.
 
 Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 
