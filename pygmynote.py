@@ -33,7 +33,6 @@ EXPORT_FILE = 'pygmynote.tsv'
 HTML_FILE = 'pygmynote.html'
 
 ENC = 'UTF-8'
-DEBUG = False
 DOMAIN = 'pygmynote'
 
 # Terminal colors
@@ -63,27 +62,16 @@ except IOError:
 
 try:
 	import sqlite3 as sqlite
-	if DEBUG == True:
-		print _('Using sqlite3 with Python %s' % sys.version)
 except ImportError:
 	from pysqlite2 import dbapi2 as sqlite
-	if DEBUG == True:
-		print _('Using pysqlite2 with Python %s') % sys.version
 
 if os.path.exists(DB):
-	if DEBUG == True:
-		print _('The database already exists.')
 	CREATE = False
 else:
-	if DEBUG == False:
-		print _('Creating a new database.')
 	CREATE = True
 
 try:
-	if DEBUG == False:
-		conn = sqlite.connect(DB)
-	else:
-		conn = sqlite.connect(DB, timeout=0.5, encoding=ENC)
+	conn = sqlite.connect(DB)
 	cursor = conn.cursor()
 except:
 	sys.exit(_('Connection to the SQLite database failed!'))

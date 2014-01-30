@@ -34,7 +34,6 @@ EXPORT_FILE = 'pygmynote.tsv'
 HTML_FILE = HTML_FILE
 
 ENC = "UTF-8"
-DEBUG = False
 DOMAIN = "pygmynote"
 
 # Terminal colors
@@ -63,19 +62,12 @@ except IOError:
 
 
 if os.path.exists(DB):
-	if DEBUG == True:
-		print (_("The database already exists."))
 	CREATE = False
 else:
-	if DEBUG == False:
-		print (_("Creating a new database."))
 	CREATE = True
 
 try:
-	if DEBUG == False:
-		conn = sqlite.connect(DB)
-	else:
-		conn = sqlite.connect(DB, timeout=0.5, encoding=ENC)
+	conn = sqlite.connect(DB)
 	cursor = conn.cursor()
 except:
 	sys.exit(_("Connection to the SQLite database failed!"))
