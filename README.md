@@ -28,6 +28,17 @@ Clone the repository using the `git clone https://github.com/dmpop/pygmynote.git
 
 Open terminal, switch to the *pygmynote* directory and run the _pygmynote.py_ script in the terminal. Type *help* and press `Enter` to list the available commands.
 
+##Localization
+
+	cd pygmynote
+	xgettext --language=Python --keyword=_ --output=pygmynote.pot pygmynote.py
+	mkdir -p locale/xx/LC_MESSAGES
+	cp pygmynote.pot locale/xx/LC_MESSAGES/pygmynote.po
+	cd locale/xx/LC_MESSAGES
+	msgfmt pygmynote.po -o pygmynote.mo
+
+	$ LANGUAGE=xx python pygmynote.py
+
 ##License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.

@@ -5,19 +5,6 @@
 Pygmynote is a command-line tool for storing and managing heterogeneous bit of data like notes, tasks, links, file attachments, etc. Pygmynote is written in Python and uses an SQLite database as its back end.
 
 Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
-
-i18:
-~~~~
-cd pygmynote
-xgettext --language=Python --keyword=_ --output=pygmynote.pot pygmynote.py
-mkdir -p locale/xx/LC_MESSAGES
-cp pygmynote.pot locale/xx/LC_MESSAGES/pygmynote.po
-cd locale/xx/LC_MESSAGES
-msgfmt pygmynote.po -o pygmynote.mo
-
-test_i18:
-~~~~~~~~~
-$ LANGUAGE=xx python pygmynote.py
 """
 
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
