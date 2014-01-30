@@ -5,7 +5,7 @@ Pygmynote is a command-line tool for storing and managing heterogeneous bit of d
 ##Features
 
 - Add, update, archive, and delete records
-- Specify date for records to turn them into tasks
+- Specify dates for records to turn them into tasks
 - Add long notes using an external text editor
 - Add records with attachments
 - Search records by note and by tag
