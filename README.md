@@ -2,6 +2,19 @@
 
 Pygmynote is a command-line tool for storing and managing heterogeneous bit of data like notes, tasks, links, file attachments, etc. Pygmynote is written in Python and uses an SQLite database as its back end.
 
+##Features
+
+- Add, update, archive, and delete records
+- Specify date for records to turn them into tasks
+- Add long notes using an external text editor
+- Add records with attachments
+- Search records by note and by tag
+- View active and archived records
+- Pin and unpin records
+- Export records in the TSV format (tab-separated)
+- Backup the database
+- Generate an HTML file with records containing a specified tag
+
 ##Dependencies
 
 - Python 2.x or 3.x
