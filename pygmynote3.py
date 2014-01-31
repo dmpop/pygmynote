@@ -110,7 +110,7 @@ print (_("""
 Pinned records and today's deadlines:
 -------------------------------------"""))
 
-cursor.execute ("SELECT id, note, tags FROM notes WHERE type = '3' ORDER BY id ASC")
+cursor.execute ("SELECT id, note, tags FROM notes WHERE type = '3' ORDER BY id DESC")
 for row in cursor:
 	print ('\n' + termcolor.GREEN + str(row[0]) + termcolor.END + ' ' + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END)
 
