@@ -10,6 +10,7 @@ Pygmynote is a command-line tool for storing and managing heterogeneous bit of d
 - Add records with attachments
 - Search records by note and by tag
 - View active and archived records
+- Run user-defined SQL queries
 - Pin and unpin records
 - Export records in the TSV format (tab-separated)
 - Backup the database

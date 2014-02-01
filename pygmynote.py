@@ -148,6 +148,7 @@ a	Show active records
 ar	Show archived records
 tl	Show tasks
 at	Show records with attachments
+sql	Run a user-defined SQL query
 e	Export records as CSV file
 g	Generate HTML page with records containing a certain tag
 d	Delete a record by its ID
@@ -259,6 +260,19 @@ q	Quit""") + termcolor.END
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
+				counter = counter + 1
+			print '\n-----'
+			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
+			counter = 0
+		elif command == 'sql':
+
+# Run a user-defined SQL query
+
+			sqlquery = raw_input ('SELECT id, note, due, tags FROM notes ')
+			cursor.execute("SELECT id, note, due, tags FROM notes " + sqlquery)
+			print '\n-----'
+			for row in cursor:
+				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END  + unicode(row[1]) + termcolor.GRAY + str(row[2])+ ' [' + unicode(row[3]) + ']' + termcolor.END
 				counter = counter + 1
 			print '\n-----'
 			print termcolor.BLUE + _('Record count: ') + termcolor.END + str(counter)
