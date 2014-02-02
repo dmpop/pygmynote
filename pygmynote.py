@@ -10,7 +10,7 @@ Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 __author__ = 'Dmitri Popov [dmpop@linux.com]'
 __copyright__ = 'Copyleft 2011-2014 Dmitri Popov'
 __license__ = 'GPLv3'
-__version__ = '0.9.01'
+__version__ = '0.11.05'
 __URL__ = 'http://www.github.com/dmpop/pygmynote'
 
 import sys
