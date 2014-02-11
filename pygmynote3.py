@@ -365,7 +365,7 @@ q	Quit""") + termcolor.END)
 			if not os.path.exists(BACKUP):
 				os.makedirs(BACKUP)
 			shutil.copy('pygmynote.sqlite', BACKUP)
-			os.rename(BACKUP + 'pygmynote.sqlite', BACKUP + today + '-pygmynote.sql')
+			os.rename(BACKUP + 'pygmynote.sqlite', BACKUP + today + '-pygmynote.sqlite')
 			print (termcolor.GREEN + _('\nBackup copy of the database has been been saved in ') + BACKUP + termcolor.END)
 		elif command == 'e':
 
