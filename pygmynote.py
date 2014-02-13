@@ -166,7 +166,10 @@ q	Quit""") + termcolor.END
 			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
-			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
+			cursor.execute("SELECT MAX(id) FROM notes")
+			for row in cursor:
+				maxid = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END
 		elif command == 'l':
 
 # Insert a new long record
@@ -184,7 +187,10 @@ q	Quit""") + termcolor.END
 			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
 			cursor.execute(sqlquery)
 			conn.commit()
-			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
+			cursor.execute("SELECT MAX(id) FROM notes")
+			for row in cursor:
+				maxid = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END
 		elif command == 'f':
 
 # Insert a new record with file
@@ -198,7 +204,10 @@ q	Quit""") + termcolor.END
 			f.close()
 			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
-			print termcolor.GREEN + _('\nRecord has been added.') + termcolor.END
+			cursor.execute("SELECT MAX(id) FROM notes")
+			for row in cursor:
+				maxid = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END
 		elif command == 's':
 
 # Save attachment
