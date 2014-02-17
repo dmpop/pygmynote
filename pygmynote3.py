@@ -166,7 +166,7 @@ q	Quit""") + termcolor.END)
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
 				maxid = str(row[0])
-			print (termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END)
+			print (termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END)
 		elif command == 'l':
 
 # Insert a new long record
@@ -187,7 +187,7 @@ q	Quit""") + termcolor.END)
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
 				maxid = str(row[0])
-			print (termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END)
+			print (termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END)
 		elif command == 'f':
 
 # Insert a new record with file
@@ -204,7 +204,7 @@ q	Quit""") + termcolor.END)
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
 				maxid = str(row[0])
-			print (termcolor.GREEN + _('\nRecord ') + maxid +_('has been added.') + termcolor.END)
+			print (termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END)
 		elif command == 's':
 
 # Save file
