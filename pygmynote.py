@@ -152,7 +152,7 @@ sql	Run a user-defined SQL query
 e	Export records as CSV file
 g	Generate HTML page with records containing a certain tag
 d	Delete a record by its ID
-b Backup the database
+b	Backup the database
 q	Quit""") + termcolor.END
 
 		elif command == 'i':
