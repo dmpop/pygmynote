@@ -8,7 +8,7 @@ Thanks to Luis Cabrera Sauco for implementing SQLite and i18 support.
 """
 
 __author__ = "Dmitri Popov [dmpop@linux.com]"
-__copyright__ = "Copyleft 2011-2014 Dmitri Popov"
+__copyright__ = "Copyleft 2011-2016 Dmitri Popov"
 __license__ = "GPLv3"
 __version__ = "0.11.05"
 __URL__ = "http://www.github.com/dmpop/pygmynote"
@@ -89,8 +89,8 @@ Pygmynote is ready. Pile up!
 print (termcolor.BLUE + _("""\nType \"h\" and press ENTER""") + termcolor.END)
 
 def escapechar(sel):
-	sel=sel.replace("\'", "\''")
-	sel=sel.replace("\"", "\"""")
+	sel=sel.replace("'", "’")
+        sel=sel.replace("\"", "”")
 	return sel
 
 
