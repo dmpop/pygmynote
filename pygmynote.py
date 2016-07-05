@@ -92,8 +92,8 @@ Pygmynote is ready. Pile up!
 print termcolor.BLUE + _("""\nType \"h\" and press ENTER""") + termcolor.END
 
 def escapechar(sel):
-	sel=sel.replace("\'", "\''")
-	sel=sel.replace("\"", "\"""")
+	sel=sel.replace("'", "’")
+        sel=sel.replace("\"", "”")
 	return sel
 
 
