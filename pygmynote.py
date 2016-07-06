@@ -47,13 +47,13 @@ class termcolor:
 	RED = '\033[1;31m'
 	END = '\033[1;m'
 
-	def disable(self):
-		self.GREEN = ''
-		self.BLUE = ''
-		self.GRAY = ''
-		self.YELLOW = ''
-		self.RED = ''
-		self.END = ''
+	def disable(selectionf):
+		selectionf.GREEN = ''
+		selectionf.BLUE = ''
+		selectionf.GRAY = ''
+		selectionf.YELLOW = ''
+		selectionf.RED = ''
+		selectionf.END = ''
 
 try:
 	TRANSLATION = gettext.translation(DOMAIN, './locale')
@@ -91,10 +91,10 @@ Pygmynote is ready. Pile up!
 
 print termcolor.BLUE + _("""\nType \"h\" and press ENTER""") + termcolor.END
 
-def smartquotes(sel):
-	sel=sel.replace("'", "’")
-        sel=sel.replace("\"", "”")
-	return sel
+def smartquotes(selection):
+	selection=selection.replace("'", "’")
+        selection=selection.replace("\"", "”")
+	return selection
 
 
 if CREATE == True:
@@ -115,11 +115,11 @@ print _("""
 Pinned records and today's deadlines:
 -------------------------------------""")
 
-cursor.execute ("SELECT id, note, tags FROM notes WHERE type = '3' ORDER BY id ASC")
+cursor.execute ("selectionECT id, note, tags FROM notes WHERE type = '3' ORDER BY id ASC")
 for row in cursor:
 	print '\n' + termcolor.GREEN + str(row[0]) + termcolor.END + ' ' + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
 
-cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
+cursor.execute ("selectionECT due, id, note, tags FROM notes WHERE due = '" + today + "' AND type <> '0' ORDER BY id ASC")
 for row in cursor:
 	print '\n' + str(row[0]) + ' -- ' + termcolor.GREEN +str(row[1]) + ' ' + termcolor.END + unicode(row[2]) + termcolor.GRAY + ' [' + unicode(row[3]) + ']' + termcolor.END
 
@@ -166,7 +166,7 @@ q	Quit""") + termcolor.END
 			sql_query = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (record_note, record_due, record_tags, record_type)
 			cursor.execute(sql_query)
 			conn.commit()
-			cursor.execute("SELECT MAX(id) FROM notes")
+			cursor.execute("selectionECT MAX(id) FROM notes")
 			for row in cursor:
 				max_id = str(row[0])
 			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
@@ -187,7 +187,7 @@ q	Quit""") + termcolor.END
 			sql_query = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (record_note, record_due, record_tags, record_type)
 			cursor.execute(sql_query)
 			conn.commit()
-			cursor.execute("SELECT MAX(id) FROM notes")
+			cursor.execute("selectionECT MAX(id) FROM notes")
 			for row in cursor:
 				max_id = str(row[0])
 			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
@@ -204,7 +204,7 @@ q	Quit""") + termcolor.END
 			f.close()
 			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + record_note + "', '" + record_tags + "', '" + record_type + "', '"  + record_file[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
-			cursor.execute("SELECT MAX(id) FROM notes")
+			cursor.execute("selectionECT MAX(id) FROM notes")
 			for row in cursor:
 				max_id = str(row[0])
 			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
@@ -215,7 +215,7 @@ q	Quit""") + termcolor.END
 			record_id = raw_input(_('Record id: '))
 			output_file=raw_input(_('Specify full path and file name (e.g., /home/user/foo.png): '))
 			f=open(output_file, 'wb')
-			cursor.execute ("SELECT file FROM notes WHERE id='"  +  record_id  +  "'")
+			cursor.execute ("selectionECT file FROM notes WHERE id='"  +  record_id  +  "'")
 			ablob = cursor.fetchone()
 			f.write(ablob[0])
 			f.close()
@@ -227,7 +227,7 @@ q	Quit""") + termcolor.END
 # Search records by note
 
 			record_note = raw_input(_('Search notes for: '))
-			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
+			cursor.execute("selectionECT id, note, tags FROM notes WHERE note LIKE '%"
 							 +  record_note  +  "%'ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
@@ -241,7 +241,7 @@ q	Quit""") + termcolor.END
 # Search records by tag
 
 			search_tag = raw_input (_('Search by tag: '))
-			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" +  search_tag + "%' AND type='1' ORDER BY id ASC")
+			cursor.execute("selectionECT id, note, tags FROM notes WHERE tags LIKE '%" +  search_tag + "%' AND type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
@@ -253,7 +253,7 @@ q	Quit""") + termcolor.END
 
 # Show active records
 
-			cursor.execute("SELECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
+			cursor.execute("selectionECT id, note, tags FROM notes WHERE type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
@@ -265,7 +265,7 @@ q	Quit""") + termcolor.END
 
 # Show archived records
 
-			cursor.execute("SELECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
+			cursor.execute("selectionECT id, note, tags FROM notes WHERE type='0' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
@@ -277,8 +277,8 @@ q	Quit""") + termcolor.END
 
 # Run a user-defined SQL query
 
-			sql_query = raw_input ('SELECT id, note, due, tags FROM notes ')
-			cursor.execute("SELECT id, note, due, tags FROM notes " + sql_query)
+			sql_query = raw_input ('selectionECT id, note, due, tags FROM notes ')
+			cursor.execute("selectionECT id, note, due, tags FROM notes " + sql_query)
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END  + unicode(row[1]) + termcolor.GRAY + str(row[2])+ ' [' + unicode(row[3]) + ']' + termcolor.END
@@ -293,7 +293,7 @@ q	Quit""") + termcolor.END
 			record_id = raw_input(_('Record id: '))
 			record_type = raw_input(_('Update note [0], tags [1], due date [2], or archive [3]: '))
 			if record_type == '0':
-				cursor.execute ("SELECT id, note FROM notes WHERE id='" + record_id + "'")
+				cursor.execute ("selectionECT id, note FROM notes WHERE id='" + record_id + "'")
 				row = cursor.fetchone()
 				f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 				n = f.name
@@ -338,7 +338,7 @@ q	Quit""") + termcolor.END
 
 # Show tasks
 
-			cursor.execute ("SELECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = '1' ORDER BY due ASC")
+			cursor.execute ("selectionECT due, id, note, tags FROM notes WHERE due <> '' AND tags NOT LIKE '%private%' AND type = '1' ORDER BY due ASC")
 			print '\n-----'
 			now = datetime.datetime.now()
 			calendar.prmonth(now.year, now.month)
@@ -352,7 +352,7 @@ q	Quit""") + termcolor.END
 
 # Show records with attachments
 
-			cursor.execute("SELECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
+			cursor.execute("selectionECT id, note, tags, ext FROM notes WHERE ext <> 'None' AND type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + '] ' + termcolor.END + termcolor.HIGHLIGHT + str(row[3]) + termcolor.END
@@ -381,7 +381,7 @@ q	Quit""") + termcolor.END
 
 # Export records
 
-			cursor.execute("SELECT id, note, tags, due FROM notes ORDER BY id ASC")
+			cursor.execute("selectionECT id, note, tags, due FROM notes ORDER BY id ASC")
 			if os.path.exists(EXPORT_FILE):
 				os.remove(EXPORT_FILE)
 			for row in cursor:
@@ -395,7 +395,7 @@ q	Quit""") + termcolor.END
 # Generate an HTML file
 
 			search_tag = smartquotes(raw_input(_('Tag: ')))
-			cursor.execute("SELECT note, tags FROM notes WHERE tags LIKE '%" + search_tag + "%' AND type='1' ORDER BY id ASC")
+			cursor.execute("selectionECT note, tags FROM notes WHERE tags LIKE '%" + search_tag + "%' AND type='1' ORDER BY id ASC")
 			if os.path.exists(HTML_FILE):
 				os.remove(HTML_FILE)
 			f = HTML_FILE
