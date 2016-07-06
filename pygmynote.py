@@ -91,7 +91,7 @@ Pygmynote is ready. Pile up!
 
 print termcolor.BLUE + _("""\nType \"h\" and press ENTER""") + termcolor.END
 
-def escapechar(sel):
+def smartquotes(sel):
 	sel=sel.replace("'", "’")
         sel=sel.replace("\"", "”")
 	return sel
@@ -159,17 +159,17 @@ q	Quit""") + termcolor.END
 
 # Insert a new record
 
-			rtxt = escapechar(raw_input(_('Note: ')))
-			rtags = escapechar(raw_input(_('Tags: ')))
-			rdue = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
-			rtype = "1"
-			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
-			cursor.execute(sqlquery)
+			record_note = smartquotes(raw_input(_('Note: ')))
+			record_tags = smartquotes(raw_input(_('Tags: ')))
+			record_due = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
+			record_type = "1"
+			sql_query = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (record_note, record_due, record_tags, record_type)
+			cursor.execute(sql_query)
 			conn.commit()
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
-				maxid = str(row[0])
-			print termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END
+				max_id = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
 		elif command == 'l':
 
 # Insert a new long record
@@ -180,42 +180,42 @@ q	Quit""") + termcolor.END
 			f.close()
 			subprocess.call([EDITOR, n])
 			with open(n) as f:
-				rtxt = escapechar(f.read())
-			rtags = escapechar(raw_input('Tags: '))
-			rdue = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
-			rtype = "1"
-			sqlquery = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (rtxt, rdue, rtags, rtype)
-			cursor.execute(sqlquery)
+				record_note = smartquotes(f.read())
+			record_tags = smartquotes(raw_input('Tags: '))
+			record_due = raw_input(_('Due date (yyyy-mm-dd). Press ENTER to skip: '))
+			record_type = "1"
+			sql_query = "INSERT INTO notes (note, due, tags, type) VALUES ('%s', '%s', '%s', '%s')" % (record_note, record_due, record_tags, record_type)
+			cursor.execute(sql_query)
 			conn.commit()
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
-				maxid = str(row[0])
-			print termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END
+				max_id = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
 		elif command == 'f':
 
 # Insert a new record with file
 
-			rtxt = escapechar(raw_input(_('Note: ')))
-			rtags = escapechar(raw_input(_('Tags: ')))
-			rfile = escapechar(raw_input(_('Enter path to file (e.g., /home/user/foo.png): ')))
-			rtype="1"
-			f=open(rfile.rstrip(), 'rb')
+			record_note = smartquotes(raw_input(_('Note: ')))
+			record_tags = smartquotes(raw_input(_('Tags: ')))
+			record_file = smartquotes(raw_input(_('Enter path to file (e.g., /home/user/foo.png): ')))
+			record_type="1"
+			f=open(record_file.rstrip(), 'rb')
 			ablob = f.read()
 			f.close()
-			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + rtxt + "', '" + rtags + "', '" + rtype + "', '"  + rfile[-3:] + "', ?)", [sqlite.Binary(ablob)])
+			cursor.execute("INSERT INTO notes (note, tags, type, ext, file) VALUES('" + record_note + "', '" + record_tags + "', '" + record_type + "', '"  + record_file[-3:] + "', ?)", [sqlite.Binary(ablob)])
 			conn.commit()
 			cursor.execute("SELECT MAX(id) FROM notes")
 			for row in cursor:
-				maxid = str(row[0])
-			print termcolor.GREEN + _('\nRecord ') + maxid +_(' has been added.') + termcolor.END
+				max_id = str(row[0])
+			print termcolor.GREEN + _('\nRecord ') + max_id +_(' has been added.') + termcolor.END
 		elif command == 's':
 
 # Save attachment
 
-			recid = raw_input(_('Record id: '))
-			outfile=raw_input(_('Specify full path and file name (e.g., /home/user/foo.png): '))
-			f=open(outfile, 'wb')
-			cursor.execute ("SELECT file FROM notes WHERE id='"  +  recid  +  "'")
+			record_id = raw_input(_('Record id: '))
+			output_file=raw_input(_('Specify full path and file name (e.g., /home/user/foo.png): '))
+			f=open(output_file, 'wb')
+			cursor.execute ("SELECT file FROM notes WHERE id='"  +  record_id  +  "'")
 			ablob = cursor.fetchone()
 			f.write(ablob[0])
 			f.close()
@@ -226,9 +226,9 @@ q	Quit""") + termcolor.END
 
 # Search records by note
 
-			rtxt = raw_input(_('Search notes for: '))
+			record_note = raw_input(_('Search notes for: '))
 			cursor.execute("SELECT id, note, tags FROM notes WHERE note LIKE '%"
-							 +  rtxt  +  "%'ORDER BY id ASC")
+							 +  record_note  +  "%'ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
@@ -240,8 +240,8 @@ q	Quit""") + termcolor.END
 
 # Search records by tag
 
-			stag = raw_input (_('Search by tag: '))
-			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" +  stag + "%' AND type='1' ORDER BY id ASC")
+			search_tag = raw_input (_('Search by tag: '))
+			cursor.execute("SELECT id, note, tags FROM notes WHERE tags LIKE '%" +  search_tag + "%' AND type='1' ORDER BY id ASC")
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END + unicode(row[1]) + termcolor.GRAY + ' [' + unicode(row[2]) + ']' + termcolor.END
@@ -277,8 +277,8 @@ q	Quit""") + termcolor.END
 
 # Run a user-defined SQL query
 
-			sqlquery = raw_input ('SELECT id, note, due, tags FROM notes ')
-			cursor.execute("SELECT id, note, due, tags FROM notes " + sqlquery)
+			sql_query = raw_input ('SELECT id, note, due, tags FROM notes ')
+			cursor.execute("SELECT id, note, due, tags FROM notes " + sql_query)
 			print '\n-----'
 			for row in cursor:
 				print termcolor.GREEN + '\n' +str(row[0]) + ' ' + termcolor.END  + unicode(row[1]) + termcolor.GRAY + str(row[2])+ ' [' + unicode(row[3]) + ']' + termcolor.END
@@ -290,10 +290,10 @@ q	Quit""") + termcolor.END
 
 # Update a record
 
-			recid = raw_input(_('Record id: '))
-			rtype = raw_input(_('Update note [0], tags [1], due date [2], or archive [3]: '))
-			if rtype == '0':
-				cursor.execute ("SELECT id, note FROM notes WHERE id='" + recid + "'")
+			record_id = raw_input(_('Record id: '))
+			record_type = raw_input(_('Update note [0], tags [1], due date [2], or archive [3]: '))
+			if record_type == '0':
+				cursor.execute ("SELECT id, note FROM notes WHERE id='" + record_id + "'")
 				row = cursor.fetchone()
 				f = tempfile.NamedTemporaryFile(mode='w+t', delete=False)
 				n = f.name
@@ -301,37 +301,37 @@ q	Quit""") + termcolor.END
 				f.close()
 				subprocess.call([EDITOR, n])
 				with open(n) as f:
-					noteupd = escapechar(f.read())
-				sqlstr = escapechar(noteupd)
-				cursor.execute("UPDATE notes SET note='"  +  sqlstr
-								 +  "' WHERE id='"  +  recid  +  "'")
-			elif rtype == '1':
-				tagupd = raw_input(_('Tags: '))
-				sqlstr = escapechar(tagupd)
-				cursor.execute("UPDATE notes SET tags='" + sqlstr
-								 + "' WHERE id='"  +  recid  +  "'")
-			elif rtype == '2':
-				dueupd = raw_input(_('Due date: '))
-				cursor.execute("UPDATE notes SET due='"  +  dueupd
-								 +  "' WHERE id='"  +  recid  +  "'")
+					updated_note = smartquotes(f.read())
+				sanitized_sql = smartquotes(updated_note)
+				cursor.execute("UPDATE notes SET note='"  +  sanitized_sql
+								 +  "' WHERE id='"  +  record_id  +  "'")
+			elif record_type == '1':
+				updated_tags = raw_input(_('Tags: '))
+				sanitized_sql = smartquotes(updated_tags)
+				cursor.execute("UPDATE notes SET tags='" + sanitized_sql
+								 + "' WHERE id='"  +  record_id  +  "'")
+			elif record_type == '2':
+				updated_due = raw_input(_('Due date: '))
+				cursor.execute("UPDATE notes SET due='"  +  updated_due
+								 +  "' WHERE id='"  +  record_id  +  "'")
 			else:
-				cursor.execute("UPDATE notes SET type='0' WHERE id='"  +  recid  + "'")
+				cursor.execute("UPDATE notes SET type='0' WHERE id='"  +  record_id  + "'")
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been updated.') +termcolor.END
 		elif command == 'p':
 
 # Pin a record
 
-			recid = raw_input(_('Record id: '))
-			cursor.execute("UPDATE notes SET type='3' WHERE id='"  +  recid  + "'")
+			record_id = raw_input(_('Record id: '))
+			cursor.execute("UPDATE notes SET type='3' WHERE id='"  +  record_id  + "'")
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been pinned.') +termcolor.END
 		elif command == 'x':
 
 # Unpin a record
 
-			recid = raw_input(_('Record id: '))
-			cursor.execute("UPDATE notes SET type='1' WHERE id='"  +  recid  + "'")
+			record_id = raw_input(_('Record id: '))
+			cursor.execute("UPDATE notes SET type='1' WHERE id='"  +  record_id  + "'")
 			conn.commit()
 			print termcolor.GREEN + _('\nRecord has been unpinned.') +termcolor.END
 		elif command == 'tl':
@@ -364,8 +364,8 @@ q	Quit""") + termcolor.END
 
 # Delete a record by its ID
 
-			recid = raw_input('Delete note ID: ')
-			cursor.execute("DELETE FROM notes WHERE ID='" + recid + "'")
+			record_id = raw_input('Delete note ID: ')
+			cursor.execute("DELETE FROM notes WHERE ID='" + record_id + "'")
 			print termcolor.GREEN + _('\nRecord has been deleted.') + termcolor.END
 			conn.commit()
 		elif command == 'b':
@@ -394,8 +394,8 @@ q	Quit""") + termcolor.END
 
 # Generate an HTML file
 
-			stag = escapechar(raw_input(_('Tag: ')))
-			cursor.execute("SELECT note, tags FROM notes WHERE tags LIKE '%" + stag + "%' AND type='1' ORDER BY id ASC")
+			search_tag = smartquotes(raw_input(_('Tag: ')))
+			cursor.execute("SELECT note, tags FROM notes WHERE tags LIKE '%" + search_tag + "%' AND type='1' ORDER BY id ASC")
 			if os.path.exists(HTML_FILE):
 				os.remove(HTML_FILE)
 			f = HTML_FILE
